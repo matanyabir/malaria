@@ -1,0 +1,66 @@
+﻿/* ---- top-panel ---- */
+#top-panel
+{
+	position: absolute;
+	border: 1px brown solid;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 100px;
+	background: yellow;
+}
+.day {
+	font-size: 16px;
+	color: blue;
+}
+.day.hot-period {
+	color: red;
+}
+/* ---- side-bar ---- */
+#side-bar
+{
+	position: absolute;
+	border: 1px brown solid;
+	top: 100px;
+	bottom: 0;
+	left: 0;
+	width: 150px;
+	background: yellow;
+}
+.search-all {
+	font-size: 20px;
+}
+.search-all.disabled {
+	pointer-events: none;
+	opacity: 0.3;
+}
+/* ---- map-container ---- */
+#map-container
+{
+	position: absolute;
+	border: 1px brown solid;
+	top: 100px;
+	bottom: 10px;
+	left: 150px;
+	right: 0px;
+	background: #DDEE44;
+	overflow: scroll;
+}
+.map
+{
+	position: relative;
+	background: green;
+}
+.house {
+	position: absolute;
+	background: brown;
+	width: 5px;
+	height: 10px;
+}
+.puddle {
+	position: absolute;
+	background: blue;
+	width: 10px;
+	height: 10px;
+	border-radius: 10px;
+}

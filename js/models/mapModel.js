@@ -1,0 +1,103 @@
+/**
+ * MapModel - the
+ *
+ * @author Matanya
+ */
+const MapModel = Backbone.Model.extend(
+{
+	// default values
+	defaults:
+	{
+		// TBD: make small models, e.g.: TimeModel, RulesModel, etc.?
+		day: 0 // current day
+		,periodIndex: 0 // current index of period in time.periods array
+		,cash: 0 // current cash
+	}
+
+	/**
+	 * recursively init all the items from JSON
+	 * @param data: the {items, name, isCollapse, lock} JSON
+	*/
+	,buildFromJson (data)
+	{
+		const {size, time, cash} = data;
+		const mosquitoes = new MosquitoesCollection;
+		const houses = new HousesCollection;
+		const humans = new HumansCollection;
+		const puddles = new PuddlesCollection;
+		if (data.mosquitoes) {
+			data.mosquitoes.forEach((item) => {
+				const model = new MosquitoModel(item);
+				mosquitoes.add(model);
+			});
+		}
+		if (data.houses) {
+			data.houses.forEach((item) => {
+				const model = new HouseModel(item);
+				houses.add(model);
+			});
+		}
+		if (data.humans) {
+			data.humans.forEach((item) => {
+				const model = new HumanModel(item);
+				humans.add(model);
+			});
+		}
+		if (data.puddles) {
+			data.puddles.forEach((item) => {
+				// item.periodIndex = 0;
+				const model = new PuddleModel(item);
+
+				puddles.add(model);
+			});
+		}
+		this.set({size, time, cash, mosquitoes, houses, humans, puddles});
+		return this;
+	}
+
+	// /**
+	//  * get curr state JSON
+	// */
+	// ,getJson ()
+	// {
+	// 	return {tbd};
+	// }
+
+	,incDay ()
+	{
+	    let day = this.get('day') + 1;
+	    this.set({day});
+	    const {periods} = this.get('time');
+	    let periodIndex = 0;
+	    while (periodIndex < periods.length) {
+	    	const {duration} = periods[periodIndex];
+	    	if (day < duration) {
+	    		// we are in the middle of "periodIndex" period
+	    		break;
+			}
+	    	day -= duration;
+			periodIndex++;
+		}
+		// TBD: if (periodIndex === periods.length) level end...
+		if (this.get('periodIndex') !== periodIndex) {
+			// this.get('puddles').each( model => model.set({periodIndex}));
+			this.get('puddles').each( model => model.set({periodIndex}));
+			this.set({periodIndex});
+		}
+		this.get('mosquitoes').each( model => model.incDay());
+	}
+
+	,getCurrPeriod ()
+	{
+	    const {periods} = this.get('time');
+	    const periodIndex = this.get('periodIndex');
+	    return periods[periodIndex];
+	}
+	,searchPuddles (cost)
+	{
+		const cash = this.get('cash') - cost;
+		this.set({cash});
+		this.get('puddles').each( model => model.found());
+	}
+
+});
