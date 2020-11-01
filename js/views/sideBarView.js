@@ -21,6 +21,16 @@ const SideBarView = Backbone.View.extend(
 	initialize ()
 	{
 		this.$data = $('<div class="data-container container"></div>');
+		this.$cash = $('<span class="kpi-txt"></span>');
+		this.$pop = $('<span class="kpi-txt"></span>');
+		this.$ill = $('<span class="kpi-txt"></span>');
+		this.$mos = $('<span class="kpi-txt"></span>');
+		this.$illMos = $('<span class="kpi-txt"></span>');
+		this.$data.append('<span class="kpi-img cash"></span>').append(this.$cash)
+			.append('<span class="kpi-img pop"></span>').append(this.$pop)
+			.append('<span class="kpi-img ill"></span>').append(this.$ill)
+			.append('<span class="kpi-img mos"></span>').append(this.$mos)
+			.append('<span class="kpi-img ill-mos"></span>').append(this.$illMos);
 		this.$actions = $('<div class="actions-container container"></div>');
 		this.$searchAllButton = $('<div class="action"><button class="search-all"></button><span class="cost">' + this.searchAllCost()+'$</span></div>');
 		this.$sprayCost = $('<span class="cost"></span>');
@@ -30,14 +40,65 @@ const SideBarView = Backbone.View.extend(
 		this.$el.append(this.$data).append(this.$actions);
 		const kpisModel = this.model.get('kpisModel');
 		kpisModel.on('change:visiblePuddles', this.onVisiblePuddlesChange, this);
+		kpisModel.on('change:population', this.calcPop, this);
+		kpisModel.on('change:ill', this.calcIll, this);
+		kpisModel.on('change:mosquitoes', this.calcMos, this);
+		kpisModel.on('change:illMosquitoes', this.calcIllMos, this);
 		this.model.on('change:cash', this.onCashChange, this);
 		return this;
 	},
 
 	render ()
 	{
+		this.calcPop();
+		this.calcIll();
+		this.calcMos();
+		this.calcIllMos();
 		this.onCashChange();
 		return this;
+	},
+
+	calcPop ()
+	{
+		const kpisModel = this.model.get('kpisModel');
+		const count = kpisModel.get('population');
+		this.$pop.text(count);
+	},
+	calcIll ()
+	{
+		const kpisModel = this.model.get('kpisModel');
+		const count = kpisModel.get('ill');
+		this.$ill.text(count);
+		if (count>20) // tbd rules
+		{
+			this.$ill.addClass('warning');
+		} else {
+			this.$ill.removeClass('warning');
+		}
+	},
+	calcMos ()
+	{
+		const kpisModel = this.model.get('kpisModel');
+		const count = kpisModel.get('mosquitoes');
+		this.$mos.text(count);
+		if (count>22000) // tbd rules
+		{
+			this.$mos.addClass('warning');
+		} else {
+			this.$mos.removeClass('warning');
+		}
+	},
+	calcIllMos ()
+	{
+		const kpisModel = this.model.get('kpisModel');
+		const count = kpisModel.get('illMosquitoes');
+		this.$illMos.text(count);
+		if (count>2000) // tbd rules
+		{
+			this.$illMos.addClass('warning');
+		} else {
+			this.$illMos.removeClass('warning');
+		}
 	},
 
 	searchAllClick ()
@@ -47,7 +108,7 @@ const SideBarView = Backbone.View.extend(
 
 	sprayClick ()
 	{
-		this.model.spray(this.calcSprayCost());
+		this.model.spray(this.sprayCost());
 	},
 
 	onVisiblePuddlesChange ()
@@ -80,6 +141,9 @@ const SideBarView = Backbone.View.extend(
 	},
 	onCashChange ()
 	{
+		const cash = this.model.get('cash');
+		this.$cash.text(cash + "$");
+
 		this.calcSearchCost();
 		this.calcSprayCost();
 	},

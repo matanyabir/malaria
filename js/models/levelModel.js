@@ -8,8 +8,8 @@ const LevelModel = Backbone.Model.extend(
 	// default values
 	defaults:
 	{
-		map: null //
-		// ,dataStatus: DATA_STATUS.NO_DATA // the status of the data
+		id: null, // the "level class" id, the server can create  "instance" for this level
+		map: null // after we have the "level instance" we will create the MapModel for it
 	}
 
 	/**
@@ -17,30 +17,10 @@ const LevelModel = Backbone.Model.extend(
 	*/
 	,loadData ()
 	{
-		const map = new MapModel({});
-		map.buildFromJson(EXAMPLE_LEVEL);
-		this.set({map});
-		// this.set({dataStatus: DATA_STATUS.LOADING});
-		// Service.getData((data)=> {
-		// 	if (data.tree) {
-		// 		const tree = new CategoryModel({});
-		// 		tree.buildFromJson(data.tree);
-		// 		this.set({
-		// 			dataStatus: DATA_STATUS.GET_SUCCESS,
-		// 			tree
-		// 		});
-		// 	}
-		// 	else {
-		// 		this.set({
-		// 			dataStatus: DATA_STATUS.NO_DATA,
-		// 			tree: this._getEmptyTree()
-		// 		});
-		// 	}
-		// }, ()=> {
-		// 	this.set({
-		// 		dataStatus: DATA_STATUS.FAIL,
-		// 		tree: this._getEmptyTree()
-		// 	});
-		// });
+		Service.startLevel(this.get("id"), (data) => {
+			const map = new MapModel({});
+			map.buildFromJson(data);
+			this.set({map});
+		});
 	}
 });

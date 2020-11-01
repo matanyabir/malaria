@@ -18,6 +18,7 @@ const PUDDLE_STATE = {
 };
 
 const EXAMPLE_LEVEL = {
+	id: 'random1234', // id of current "instance" of the level: this current instance of the level of this user, etc.
 	stats: {
 		tbd: 'can be stats from "last year" etc.'
 	},

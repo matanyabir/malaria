@@ -9,9 +9,10 @@ const MapModel = Backbone.Model.extend(
 	defaults:
 	{
 		// TBD: make small models, e.g.: TimeModel, RulesModel, etc.?
-		day: 0 // current day
-		,periodIndex: 0 // current index of period in time.periods array
-		,cash: 0 // current cash
+		id: 0, // the id of the level
+		day: 0, // current day
+		periodIndex: 0, // current index of period in time.periods array
+		cash: 0, // current cash
 	}
 
 	/**
@@ -20,29 +21,29 @@ const MapModel = Backbone.Model.extend(
 	*/
 	,buildFromJson (data)
 	{
-		const {size, time, cash, kpis} = data;
-		const mosquitoes = new MosquitoesCollection;
+		const {size, time, cash, kpis, id} = data;
+		// const mosquitoes = new MosquitoesCollection;
 		const houses = new HousesCollection;
-		const humans = new HumansCollection;
+		// const humans = new HumansCollection;
 		const puddles = new PuddlesCollection;
-		if (data.mosquitoes) {
-			data.mosquitoes.forEach((item) => {
-				const model = new MosquitoModel(item);
-				mosquitoes.add(model);
-			});
-		}
+		// if (data.mosquitoes) {
+		// 	data.mosquitoes.forEach((item) => {
+		// 		const model = new MosquitoModel(item);
+		// 		mosquitoes.add(model);
+		// 	});
+		// }
 		if (data.houses) {
 			data.houses.forEach((item) => {
 				const model = new HouseModel(item);
 				houses.add(model);
 			});
 		}
-		if (data.humans) {
-			data.humans.forEach((item) => {
-				const model = new HumanModel(item);
-				humans.add(model);
-			});
-		}
+		// if (data.humans) {
+		// 	data.humans.forEach((item) => {
+		// 		const model = new HumanModel(item);
+		// 		humans.add(model);
+		// 	});
+		// }
 		if (data.puddles) {
 			data.puddles.forEach((item) => {
 				// item.periodIndex = 0;
@@ -52,7 +53,8 @@ const MapModel = Backbone.Model.extend(
 			});
 		}
 		const kpisModel = new KpisModel(kpis);
-		this.set({size, time, cash, mosquitoes, houses, humans, puddles, kpisModel});
+		// this.set({size, time, cash, mosquitoes, houses, humans, puddles, kpisModel, id});
+		this.set({size, time, cash, houses, puddles, kpisModel, id});
 		this.updatePuddlesCount();
 		return this;
 	}
@@ -67,29 +69,33 @@ const MapModel = Backbone.Model.extend(
 
 	,incDay ()
 	{
-	    let day = this.get('day') + 1;
-	    this.set({day});
-	    const {periods} = this.get('time');
-	    let periodIndex = 0;
-	    while (periodIndex < periods.length) {
-	    	const {duration} = periods[periodIndex];
-	    	if (day < duration) {
-	    		// we are in the middle of "periodIndex" period
-	    		break;
-			}
-	    	day -= duration;
-			periodIndex++;
-		}
-		// TBD: if (periodIndex === periods.length) level end...
-		if (this.get('periodIndex') !== periodIndex) {
+		this.set('loading', true);
+		Service.incDay(this.get('id'), (kpis)=> {
+			this.set('loading', false);
 			const kpisModel = this.get('kpisModel');
-			kpisModel.set('visiblePuddles', 0);
-			// this.get('puddles').each( model => model.set({periodIndex}));
-			this.get('puddles').each( model => model.set({periodIndex}));
-			this.set({periodIndex});
-			this.updatePuddlesCount();
-		}
-		this.get('mosquitoes').each( model => model.incDay());
+			kpisModel.set(kpis);
+			let day = this.get('day') + 1;
+			this.set({day});
+			const {periods} = this.get('time');
+			let periodIndex = 0;
+			while (periodIndex < periods.length) {
+				const {duration} = periods[periodIndex];
+				if (day < duration) {
+					// we are in the middle of "periodIndex" period
+					break;
+				}
+				day -= duration;
+				periodIndex++;
+			}
+			// TBD: if (periodIndex === periods.length) level end...
+			if (this.get('periodIndex') !== periodIndex) {
+				kpisModel.set('visiblePuddles', 0);
+				// this.get('puddles').each( model => model.set({periodIndex}));
+				this.get('puddles').each( model => model.set({periodIndex}));
+				this.set({periodIndex});
+				this.updatePuddlesCount();
+			}
+		});
 	}
 
 	,getCurrPeriod ()

@@ -40,8 +40,41 @@ button:hover {
 	width: 200px;
 	background: #a5e6e4;
 }
-.data-container
+.kpi-img {
+	margin-right: 5px;
+	float: left;
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	background-size: 30px 30px;
+}
+.kpi-img.cash {
+	background-image: url("../svgs/all/money.svg");
+}
+.kpi-img.pop {
+	background-image: url("../svgs/all/multiple-users-silhouette.svg");
+}
+.kpi-img.ill {
+	background-image: url("../svgs/all/ill.svg");
+}
+.kpi-img.mos {
+	background-image: url("../svgs/all/mosquito.svg");
+}
+.kpi-img.ill-mos {
+	background-image: url("../svgs/all/red-mosquito.svg");
+}
+.kpi-txt {
+	display: block;
+	line-height: 30px;
+	color: #1b038a;
+	margin-bottom: 10px;
+}.kpi-txt.warning {
+	color: #b80000;
+}
+
+.data-container.container
 {
+	padding-bottom: 0;
 	border-bottom: 1px #1b038a solid;
 }
 .search-all {
