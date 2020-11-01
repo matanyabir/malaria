@@ -67,8 +67,11 @@ const MapModel = Backbone.Model.extend(
 	// 	return {tbd};
 	// }
 
-	,incDay ()
+	,incDay (cb)
 	{
+		if (this.get('end')) {
+			return;
+		}
 		this.set('loading', true);
 		Service.incDay(this.get('id'), (kpis)=> {
 			this.set('loading', false);
@@ -87,7 +90,11 @@ const MapModel = Backbone.Model.extend(
 				day -= duration;
 				periodIndex++;
 			}
-			// TBD: if (periodIndex === periods.length) level end...
+			if (periodIndex === periods.length){
+				//TBD level end...
+				this.set('end', true);
+				return;
+			}
 			if (this.get('periodIndex') !== periodIndex) {
 				kpisModel.set('visiblePuddles', 0);
 				// this.get('puddles').each( model => model.set({periodIndex}));
@@ -95,6 +102,10 @@ const MapModel = Backbone.Model.extend(
 				this.set({periodIndex});
 				this.updatePuddlesCount();
 			}
+			if (cb) {
+				cb();
+			}
+
 		});
 	}
 

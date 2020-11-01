@@ -22,7 +22,6 @@ const PuddleView = Backbone.View.extend({
 	renderState ()
 	{
 		const state = this.model.get('state');
-		console.log("state", state);
 		this.$el.attr("data-state", state);
 	},
 	renderVisible ()

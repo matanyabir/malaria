@@ -45,6 +45,7 @@ const SideBarView = Backbone.View.extend(
 		kpisModel.on('change:mosquitoes', this.calcMos, this);
 		kpisModel.on('change:illMosquitoes', this.calcIllMos, this);
 		this.model.on('change:cash', this.onCashChange, this);
+		this.model.on('change:loading', this.onLoadingChange, this);
 		return this;
 	},
 
@@ -58,6 +59,15 @@ const SideBarView = Backbone.View.extend(
 		return this;
 	},
 
+	onLoadingChange ()
+	{
+		const loading = this.model.get('loading');
+		if (loading) {
+			this.$el.addClass('loading');
+		} else {
+			this.$el.removeClass('loading');
+		}
+	},
 	calcPop ()
 	{
 		const kpisModel = this.model.get('kpisModel');

@@ -20,14 +20,69 @@ button:hover {
 	left: 0;
 	right: 0;
 	height: 100px;
-	background: #a5e6e4;
+	background: #8bbdbc;
+}
+.cal {
+	position: relative;
+	height: 10px;
+	top: 44px;
+	border-right: 1px #1b038a solid;
+	border-bottom: 1px #1b038a solid;
+	margin: auto;
+}
+.period {
+	position: absolute;
+	bottom: 0;
+	height: 10px;
+	border-left: 1px #1b038a solid;
+}
+.period::before {
+	content: "";
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	height: 30px;
+	background-size: 30px 30px;
+	background-image: url("../svgs/all/rain.svg");
+	bottom: -38px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+.period.hot-period::before {
+	background-image: url("../svgs/all/sun.svg");
 }
 .day {
+	position: absolute;
+	bottom: 20px;
 	font-size: 16px;
-	color: blue;
+	color: #1b038a;
+	width: 100px;
+	margin-left: -50px;
+	text-align: center;
 }
-.day.hot-period {
-	color: red;
+.day::before {
+	content: "";
+	position: absolute;
+	bottom: -21px;
+	left: 50px;
+	height: 20px;
+	width: 1px;
+	background: #1b038a;
+}
+.next-day {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	background-size: 30px 30px;
+	background-image: url("../svgs/all/24-hours.svg");
+}
+.next-month {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	background-size: 30px 30px;
+	background-image: url("../svgs/all/calendar.svg");
 }
 /* ---- side-bar ---- */
 #side-bar
@@ -38,7 +93,7 @@ button:hover {
 	bottom: 0;
 	left: 0;
 	width: 200px;
-	background: #a5e6e4;
+	background: #8bbdbc;
 }
 .kpi-img {
 	margin-right: 5px;
@@ -100,7 +155,7 @@ button:hover {
 .action.disabled .cost {
 	color: #b80000;
 }
-.disabled button{
+.disabled button, .loading button:not(.enable-during-loading){
 	pointer-events: none;
 	opacity: 0.3;
 }
