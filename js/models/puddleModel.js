@@ -29,8 +29,9 @@ const PuddleModel = Backbone.Model.extend(
 	},
 	found: function ()
 	{
-		if (this.get('state') !== PUDDLE_STATE.EMPTY) {
+		if (!this.get("visible") && this.get('state') !== PUDDLE_STATE.EMPTY) {
 			this.set({visible: true});
+			return true;
 		}
 	},
 

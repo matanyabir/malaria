@@ -1,12 +1,31 @@
 const MapView = Backbone.View.extend({
 	className: 'map',
-
+	initialize ()
+	{
+		this.model.on('change:periodIndex', this.renderPeriod, this);
+		return this;
+	},
 	render: function ()
 	{
+		this.renderPeriod();
 		this.renderMap();
 		this.renderHouses();
 		this.renderPuddles();
 		return this;
+	},
+
+	renderPeriod ()
+	{
+		const period = this.model.getCurrPeriod();
+		if (!period) {
+			this.$el.html('TBD. Level ended.');
+			return;
+		}
+		if (period.type === PERIOD_TYPE.HOT) {
+			this.$el.addClass('hot-period');
+		} else {
+			this.$el.removeClass('hot-period');
+		}
 	},
 
 	renderHouses: function ()

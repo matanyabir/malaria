@@ -14,7 +14,7 @@ const LOCATION = {
 const PUDDLE_STATE = {
 	EMPTY: 0 // doesn't exist in this period
 	,WEAK: 1 // exists, but can be destroyed
-	,STRONG: 1 // exists, and can't be destroyed
+	,STRONG: 2 // exists, and can't be destroyed
 };
 
 const EXAMPLE_LEVEL = {
@@ -23,6 +23,12 @@ const EXAMPLE_LEVEL = {
 	},
 	rules: {
 		tbd: "can override many rules, e.g.: death-rate of mosquitoes"
+	},
+	kpis: {
+		population: 520, // current amount of humans
+		ill: 17, // current amount of ill humans
+		mosquitoes: 20170, // current amount of mosquitoes
+		illMosquitoes: 17, // current amount of ill mosquitoes
 	},
 	cash: 12500,
 	size: {

@@ -1,13 +1,26 @@
-﻿/* ---- top-panel ---- */
+﻿/* ---- general ---- */
+.container
+{
+	padding: 10px;
+}
+button {
+	border-radius: 4px;
+	cursor: pointer;
+	border: 1px solid #1b038a;
+}
+button:hover {
+	box-shadow: #1b038a 0px 0px 10px;
+}
+/* ---- top-panel ---- */
 #top-panel
 {
 	position: absolute;
-	border: 1px brown solid;
+	border: 1px #1b038a solid;
 	top: 0;
 	left: 0;
 	right: 0;
 	height: 100px;
-	background: yellow;
+	background: #a5e6e4;
 }
 .day {
 	font-size: 16px;
@@ -20,17 +33,41 @@
 #side-bar
 {
 	position: absolute;
-	border: 1px brown solid;
+	border: 1px #1b038a solid;
 	top: 100px;
 	bottom: 0;
 	left: 0;
-	width: 150px;
-	background: yellow;
+	width: 200px;
+	background: #a5e6e4;
+}
+.data-container
+{
+	border-bottom: 1px #1b038a solid;
 }
 .search-all {
-	font-size: 20px;
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	background-image: url("../svgs/all/drone.svg");
+	background-size: 40px 40px;
 }
-.search-all.disabled {
+.spray {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	background-image: url("../svgs/all/spray-bottle.svg");
+	background-size: 40px 40px;
+}
+.cost {
+	margin-left: 5px;
+	vertical-align: top;
+	line-height: 40px;
+	color: #1b038a;
+}
+.action.disabled .cost {
+	color: #b80000;
+}
+.disabled button{
 	pointer-events: none;
 	opacity: 0.3;
 }
@@ -38,29 +75,45 @@
 #map-container
 {
 	position: absolute;
-	border: 1px brown solid;
+	border: 1px #1b038a solid;
 	top: 100px;
 	bottom: 10px;
-	left: 150px;
+	left: 200px;
 	right: 0px;
-	background: #DDEE44;
+	background: black;
 	overflow: scroll;
 }
 .map
 {
 	position: relative;
-	background: green;
+	background: #3b8025;
+}
+.map.hot-period {
+	background: #b7a51a;
+	/*background: #a58433;*/
 }
 .house {
 	position: absolute;
-	background: brown;
-	width: 5px;
-	height: 10px;
+	width: 26px;
+	height: 26px;
+	margin-left: -13px;
+	margin-top: -13px;
+	background-image: url("../svgs/all/wood-house.svg");
+	background-size: 26px 26px;
 }
 .puddle {
 	position: absolute;
-	background: blue;
-	width: 10px;
-	height: 10px;
-	border-radius: 10px;
+	width: 26px;
+	height: 26px;
+	margin-left: -13px;
+	margin-top: -13px;
+	background-image: url("../svgs/all/lake.svg");
+	background-size: 26px 26px;
+}
+.puddle[data-state="2"]
+{
+	transform: scale(1.7);
+	/*width: 45px;*/
+	/*height: 45px;*/
+	/*background-size: 45px 45px;*/
 }

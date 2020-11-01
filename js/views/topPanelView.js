@@ -51,6 +51,7 @@ const TopPanelView = Backbone.View.extend(
 		const period = this.model.getCurrPeriod();
 		if (!period) {
 			this.$day.html('TBD. Level ended.');
+			return;
 		}
 		if (period.type === PERIOD_TYPE.HOT) {
 			this.$day.addClass('hot-period');

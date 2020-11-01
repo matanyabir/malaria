@@ -20,7 +20,7 @@ const MapModel = Backbone.Model.extend(
 	*/
 	,buildFromJson (data)
 	{
-		const {size, time, cash} = data;
+		const {size, time, cash, kpis} = data;
 		const mosquitoes = new MosquitoesCollection;
 		const houses = new HousesCollection;
 		const humans = new HumansCollection;
@@ -47,11 +47,13 @@ const MapModel = Backbone.Model.extend(
 			data.puddles.forEach((item) => {
 				// item.periodIndex = 0;
 				const model = new PuddleModel(item);
-
+				model.set("periodIndex", 0);
 				puddles.add(model);
 			});
 		}
-		this.set({size, time, cash, mosquitoes, houses, humans, puddles});
+		const kpisModel = new KpisModel(kpis);
+		this.set({size, time, cash, mosquitoes, houses, humans, puddles, kpisModel});
+		this.updatePuddlesCount();
 		return this;
 	}
 
@@ -80,9 +82,12 @@ const MapModel = Backbone.Model.extend(
 		}
 		// TBD: if (periodIndex === periods.length) level end...
 		if (this.get('periodIndex') !== periodIndex) {
+			const kpisModel = this.get('kpisModel');
+			kpisModel.set('visiblePuddles', 0);
 			// this.get('puddles').each( model => model.set({periodIndex}));
 			this.get('puddles').each( model => model.set({periodIndex}));
 			this.set({periodIndex});
+			this.updatePuddlesCount();
 		}
 		this.get('mosquitoes').each( model => model.incDay());
 	}
@@ -97,7 +102,35 @@ const MapModel = Backbone.Model.extend(
 	{
 		const cash = this.get('cash') - cost;
 		this.set({cash});
-		this.get('puddles').each( model => model.found());
+		let puddlesFound = 0;
+		this.get('puddles').each( model => {
+			const isFound = model.found();
+			if (isFound) {
+				puddlesFound++;
+			}
+		});
+		if (puddlesFound) {
+			const kpisModel = this.get('kpisModel');
+			const visiblePuddles = kpisModel.get('visiblePuddles') + puddlesFound;
+			kpisModel.set({visiblePuddles});
+		}
+	}
+	,spray (cost)
+	{
+		const cash = this.get('cash') - cost;
+		this.set({cash});
+		console.log("TBD...");
+	}
+	,updatePuddlesCount ()
+	{
+		let puddles = 0;
+		this.get('puddles').each( model => {
+			if (model.get('state') !== PUDDLE_STATE.EMPTY) {
+				puddles++;
+			}
+		});
+		const kpisModel = this.get('kpisModel');
+		kpisModel.set({puddles});
 	}
 
 });
