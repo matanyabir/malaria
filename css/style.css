@@ -70,18 +70,41 @@ button:hover {
 	width: 1px;
 	background: #1b038a;
 }
+.main-status {
+	margin-left: 10px;
+	color: #1b038a;
+}
+.play-pause {
+	margin: 10px;
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	background-size: 30px 30px;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-image: url("../svgs/all/play-button-arrowhead.svg");
+}
+.play-pause.playing {
+	background-image: url("../svgs/all/pause.svg");
+}
 .next-day {
+	margin: 5px 10px;
 	display: inline-block;
 	width: 30px;
 	height: 30px;
-	background-size: 30px 30px;
+	background-size: 25px 25px;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
 	background-image: url("../svgs/all/24-hours.svg");
 }
 .next-month {
+	margin: 5px 10px;
 	display: inline-block;
 	width: 30px;
 	height: 30px;
-	background-size: 30px 30px;
+	background-size: 25px 25px;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
 	background-image: url("../svgs/all/calendar.svg");
 }
 /* ---- side-bar ---- */
@@ -136,15 +159,19 @@ button:hover {
 	display: inline-block;
 	width: 40px;
 	height: 40px;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
 	background-image: url("../svgs/all/drone.svg");
-	background-size: 40px 40px;
+	background-size: 35px 35px;
 }
 .spray {
 	display: inline-block;
 	width: 40px;
 	height: 40px;
 	background-image: url("../svgs/all/spray-bottle.svg");
-	background-size: 40px 40px;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-size: 35px 35px;
 }
 .cost {
 	margin-left: 5px;

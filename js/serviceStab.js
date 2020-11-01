@@ -17,7 +17,7 @@ const Service = (function()
 	{
 		setTimeout(function(){
 			cbSuccess(_data);
-		}, Math.random()*1000);
+		}, 300 + Math.random()*300);
 	};
 
 	/**
@@ -38,7 +38,7 @@ const Service = (function()
 			kpis.mosquitoes = Math.floor(kpis.mosquitoes * (1 + Math.random()/30));
 			kpis.illMosquitoes = Math.floor(kpis.illMosquitoes * (1 + Math.random()/50));
 			cbSuccess(kpis);
-		}, Math.random()*300);
+		}, 50 + Math.random()*100);
 	};
 	const _data = {
 		id: 'random1234', // id of current "instance" of the level: this current instance of the level of this user, etc.
