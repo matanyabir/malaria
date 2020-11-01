@@ -14,18 +14,29 @@ const PuddleModel = Backbone.Model.extend(
 		,visible: false
 	},
 
-	initialize: function ()
+	initialize ()
 	{
 		this.on('change:periodIndex', this.onPeriodChange, this);
 		return this;
 	},
+	spray ()
+	{
+		this.set('spray', 7);
+	},
+	dayPass ()
+	{
+		const spray = this.get('spray');
+		if (spray) {
+			this.set('spray', spray - 1);
+		}
+	},
 
-	onPeriodChange: function ()
+	onPeriodChange ()
 	{
 		const periodIndex = this.get('periodIndex');
 		const states = this.get('states');
 		const state = states[periodIndex];
-		this.set({state, visible: false}); // TBD: delete also risusim, eggs, etc.?
+		this.set({state, visible: false, spray: null}); // TBD: delete also risusim, eggs, etc.?
 	},
 	found: function ()
 	{

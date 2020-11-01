@@ -102,6 +102,7 @@ const MapModel = Backbone.Model.extend(
 				this.set({periodIndex});
 				this.updatePuddlesCount();
 			}
+			this.get('puddles').each( model => model.dayPass());
 			if (cb) {
 				cb();
 			}
@@ -136,7 +137,12 @@ const MapModel = Backbone.Model.extend(
 	{
 		const cash = this.get('cash') - cost;
 		this.set({cash});
-		console.log("TBD...");
+		this.get('puddles').each( model => {
+			if (model.get('visible')) {
+				model.spray();
+			}
+		});
+		console.log("TBD call service...");
 	}
 	,updatePuddlesCount ()
 	{

@@ -5,6 +5,7 @@ const PuddleView = Backbone.View.extend({
 	initialize ()
 	{
 		this.model.on('change:state', this.renderState, this);
+		this.model.on('change:spray', this.renderSpray, this);
 		this.model.on('change:visible', this.renderVisible, this);
 		return this;
 	},
@@ -14,9 +15,11 @@ const PuddleView = Backbone.View.extend({
 		const pos = this.model.get('pos');
 		const left = pos.x;
 		const top = pos.y;
-		this.$el.css({left, top});
+		this.$spray = $('<div class="spry"></div>');
+		this.$el.css({left, top}).html(this.$spray);
 		this.renderState();
 		this.renderVisible();
+		this.renderSpray();
 		return this;
 	},
 	renderState ()
@@ -32,6 +35,11 @@ const PuddleView = Backbone.View.extend({
 		} else {
 			this.$el.hide();
 		}
+	},
+	renderSpray ()
+	{
+		const spray = this.model.get('spray') || 0;
+		this.$spray.css({opacity: spray / 7});
 	},
 
 });

@@ -133,6 +133,14 @@ const Service = (function()
 				// state per period:
 				states: [PUDDLE_STATE.STRONG, PUDDLE_STATE.WEAK, PUDDLE_STATE.STRONG, PUDDLE_STATE.EMPTY],
 			},
+			{
+				id: "p8",
+				loc: LOCATION.INSIDE_VILLAGE,
+				pos : {x: 60, y:40},
+				// state per period:
+				states: [PUDDLE_STATE.STRONG, PUDDLE_STATE.STRONG, PUDDLE_STATE.STRONG, PUDDLE_STATE.STRONG],
+			},
+
 		],
 		houses: [
 			{

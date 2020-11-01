@@ -192,7 +192,7 @@ button:hover {
 	position: absolute;
 	border: 1px #1b038a solid;
 	top: 100px;
-	bottom: 10px;
+	bottom: 0px;
 	left: 200px;
 	right: 0px;
 	background: black;
@@ -223,6 +223,15 @@ button:hover {
 	margin-left: -13px;
 	margin-top: -13px;
 	background-image: url("../svgs/all/lake.svg");
+	background-size: 26px 26px;
+}
+.spry {
+	position: absolute;
+	width: 26px;
+	height: 26px;
+	top: 0;
+	left: 0;
+	background-image: url("../svgs/all/mmm.svg");
 	background-size: 26px 26px;
 }
 .puddle[data-state="2"]
