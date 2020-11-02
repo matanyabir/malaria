@@ -34,7 +34,7 @@ const SideBarView = Backbone.View.extend(
 			.append('<span class="kpi-img mos"></span>').append(this.$mos)
 			.append('<span class="kpi-img ill-mos"></span>').append(this.$illMos);
 		this.$actions = $('<div class="actions-container container"></div>');
-		this.$searchAllButton = $('<div class="action"><button class="search-all"></button><span class="cost">' + this.searchAllCost()+'$</span></div>');
+		this.$searchAllButton = $('<div class="action"><button class="search-all"></button><span class="cost">' + Utils.numTxt(this.searchAllCost())+'$</span></div>');
 		this.$sprayCost = $('<span class="cost"></span>');
 		this.$sprayButton = $('<div class="action"><button class="spray"></button></div>');
 		this.$sprayButton.append(this.$sprayCost);
@@ -75,21 +75,21 @@ const SideBarView = Backbone.View.extend(
 	calcPud ()
 	{
 		const kpisModel = this.model.get('kpisModel');
-		const all = kpisModel.get('puddles');
-		const visible = kpisModel.get('visiblePuddles');
+		const all = Utils.numTxt(kpisModel.get('puddles'));
+		const visible = Utils.numTxt(kpisModel.get('visiblePuddles'));
 		this.$pud.text(visible + " / " + all);
 	},
 	calcPop ()
 	{
 		const kpisModel = this.model.get('kpisModel');
-		const count = kpisModel.get('population');
+		const count = Utils.numTxt(kpisModel.get('population'));
 		this.$pop.text(count);
 	},
 	calcIll ()
 	{
 		const kpisModel = this.model.get('kpisModel');
 		const count = kpisModel.get('ill');
-		this.$ill.text(count);
+		this.$ill.text(Utils.numTxt(count));
 		if (count>20) // tbd rules
 		{
 			this.$ill.addClass('warning');
@@ -101,7 +101,7 @@ const SideBarView = Backbone.View.extend(
 	{
 		const kpisModel = this.model.get('kpisModel');
 		const count = kpisModel.get('mosquitoes');
-		this.$mos.text(count);
+		this.$mos.text(Utils.numTxt(count));
 		if (count>22000) // tbd rules
 		{
 			this.$mos.addClass('warning');
@@ -113,7 +113,7 @@ const SideBarView = Backbone.View.extend(
 	{
 		const kpisModel = this.model.get('kpisModel');
 		const count = kpisModel.get('illMosquitoes');
-		this.$illMos.text(count);
+		this.$illMos.text(Utils.numTxt(count));
 		if (count>2000) // tbd rules
 		{
 			this.$illMos.addClass('warning');
@@ -141,7 +141,7 @@ const SideBarView = Backbone.View.extend(
 	{
 		const cost = this.sprayCost();
 		if (cost) {
-			this.$sprayCost.text(cost + "$");
+			this.$sprayCost.text(Utils.numTxt(cost) + "$");
 		} else {
 			this.$sprayCost.text("No visible puddles...");
 		}
@@ -164,7 +164,7 @@ const SideBarView = Backbone.View.extend(
 	onCashChange ()
 	{
 		const cash = this.model.get('cash');
-		this.$cash.text(cash + "$");
+		this.$cash.text(Utils.numTxt(cash) + "$");
 
 		this.calcSearchCost();
 		this.calcSprayCost();

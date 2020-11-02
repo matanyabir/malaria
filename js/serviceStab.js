@@ -40,6 +40,7 @@ const Service = (function()
 			cbSuccess(kpis);
 		}, 50 + Math.random()*100);
 	};
+
 	const _data = {
 		id: 'random1234', // id of current "instance" of the level: this current instance of the level of this user, etc.
 		stats: {
