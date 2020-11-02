@@ -22,11 +22,13 @@ const SideBarView = Backbone.View.extend(
 	{
 		this.$data = $('<div class="data-container container"></div>');
 		this.$cash = $('<span class="kpi-txt"></span>');
+		this.$pud = $('<span class="kpi-txt"></span>');
 		this.$pop = $('<span class="kpi-txt"></span>');
 		this.$ill = $('<span class="kpi-txt"></span>');
 		this.$mos = $('<span class="kpi-txt"></span>');
 		this.$illMos = $('<span class="kpi-txt"></span>');
 		this.$data.append('<span class="kpi-img cash"></span>').append(this.$cash)
+			.append('<span class="kpi-img pud"></span>').append(this.$pud)
 			.append('<span class="kpi-img pop"></span>').append(this.$pop)
 			.append('<span class="kpi-img ill"></span>').append(this.$ill)
 			.append('<span class="kpi-img mos"></span>').append(this.$mos)
@@ -40,6 +42,7 @@ const SideBarView = Backbone.View.extend(
 		this.$el.append(this.$data).append(this.$actions);
 		const kpisModel = this.model.get('kpisModel');
 		kpisModel.on('change:visiblePuddles', this.onVisiblePuddlesChange, this);
+		kpisModel.on('change:puddles', this.calcPud, this);
 		kpisModel.on('change:population', this.calcPop, this);
 		kpisModel.on('change:ill', this.calcIll, this);
 		kpisModel.on('change:mosquitoes', this.calcMos, this);
@@ -51,6 +54,7 @@ const SideBarView = Backbone.View.extend(
 
 	render ()
 	{
+		this.calcPud();
 		this.calcPop();
 		this.calcIll();
 		this.calcMos();
@@ -67,6 +71,13 @@ const SideBarView = Backbone.View.extend(
 		} else {
 			this.$el.removeClass('loading');
 		}
+	},
+	calcPud ()
+	{
+		const kpisModel = this.model.get('kpisModel');
+		const all = kpisModel.get('puddles');
+		const visible = kpisModel.get('visiblePuddles');
+		this.$pud.text(visible + " / " + all);
 	},
 	calcPop ()
 	{
@@ -124,6 +135,7 @@ const SideBarView = Backbone.View.extend(
 	onVisiblePuddlesChange ()
 	{
 		this.calcSprayCost();
+		this.calcPud();
 	},
 	calcSprayCost ()
 	{

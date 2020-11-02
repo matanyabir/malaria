@@ -129,11 +129,15 @@ button:hover {
 .kpi-img.cash {
 	background-image: url("../svgs/all/money.svg");
 }
+.kpi-img.pud {
+	background-image: url("../svgs/all/black-lake.svg");
+}
 .kpi-img.pop {
 	background-image: url("../svgs/all/multiple-users-silhouette.svg");
 }
 .kpi-img.ill {
-	background-image: url("../svgs/all/ill.svg");
+	background-image: url("../svgs/all/red-men.svg");
+	/*background-image: url("../svgs/all/ill.svg");*/
 }
 .kpi-img.mos {
 	background-image: url("../svgs/all/mosquito.svg");
