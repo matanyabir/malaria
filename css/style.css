@@ -39,7 +39,6 @@ button:hover {
 .period::before {
 	content: "";
 	position: absolute;
-	bottom: 0px;
 	left: 0px;
 	right: 0px;
 	height: 30px;
@@ -170,12 +169,30 @@ button:hover {
 }
 .spray {
 	display: inline-block;
-	width: 40px;
+	position: relative;
+	width: 80px;
 	height: 40px;
 	background-image: url("../svgs/all/spray-bottle.svg");
-	background-position: 50% 50%;
+	background-position: 5px 50%;
 	background-repeat: no-repeat;
 	background-size: 35px 35px;
+}
+.spray::before {
+	content: "";
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: 45px 50%;
+}
+.s-puddle::before {
+	background-image: url("../svgs/all/lake.svg");
+}
+.s-house::before {
+	background-image: url("../svgs/all/wood-house.svg");
 }
 .cost {
 	margin-left: 5px;
@@ -235,8 +252,13 @@ button:hover {
 	height: 26px;
 	top: 0;
 	left: 0;
-	background-image: url("../svgs/all/mmm.svg");
 	background-size: 26px 26px;
+}
+.puddle .spry {
+	background-image: url("../svgs/all/mmm.svg");
+}
+.house .spry {
+	background-image: url("../svgs/all/nnn.svg");
 }
 .puddle[data-state="2"]
 {

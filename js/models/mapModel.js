@@ -103,6 +103,7 @@ const MapModel = Backbone.Model.extend(
 				this.updatePuddlesCount();
 			}
 			this.get('puddles').each( model => model.dayPass());
+			this.get('houses').each( model => model.dayPass());
 			if (cb) {
 				cb();
 			}
@@ -133,16 +134,35 @@ const MapModel = Backbone.Model.extend(
 			kpisModel.set({visiblePuddles});
 		}
 	}
-	,spray (cost)
+	,sprayPuddles (cost)
 	{
 		const cash = this.get('cash') - cost;
+		const puddlesIds = [];
 		this.set({cash});
 		this.get('puddles').each( model => {
 			if (model.get('visible')) {
+				puddlesIds.push(model.get('id'));
 				model.spray();
 			}
 		});
-		console.log("TBD call service...");
+		this.set('loading', true);
+		Service.sprayPuddles(this.get('id'), puddlesIds, (kpis)=> {
+			this.set('loading', false);
+		});
+
+	}
+	,sprayHouses (cost)
+	{
+		const cash = this.get('cash') - cost;
+		this.set({cash});
+		this.get('houses').each( model => {
+			model.spray();
+		});
+		this.set('loading', true);
+		Service.sprayHouses(this.get('id'), "all", (kpis)=> {
+			this.set('loading', false);
+		});
+
 	}
 	,updatePuddlesCount ()
 	{

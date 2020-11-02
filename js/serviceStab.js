@@ -41,6 +41,38 @@ const Service = (function()
 		}, 50 + Math.random()*100);
 	};
 
+	/**
+	 * notify the server that the user sprayed some houses
+	 *
+	 * @param {string} mapInstanceId - the id that represents the curr level instance
+	 * @param {array} housesIds - array of all the houses ids that we want to spray, or the string "all"
+	 * @param {function} cbSuccess - the callback that should be call in case of success, return object of kpis (relevant???)
+	 * @param {function} cbFail - the callback that should be call in case of fail
+	 * @author Matanya
+	 */
+	me.sprayHouses = function(mapInstanceId, housesIds, cbSuccess, cbFail)
+	{
+		setTimeout(function(){
+			cbSuccess({});
+		}, Math.random()*100);
+	};
+
+	/**
+	 * notify the server that the user sprayed some puddles
+	 *
+	 * @param {string} mapInstanceId - the id that represents the curr level instance
+	 * @param {array} puddlesIds - array of all the puddles ids that we want to spray
+	 * @param {function} cbSuccess - the callback that should be call in case of success, return object of kpis (if we want to handle eggs count in puddles, etc.)
+	 * @param {function} cbFail - the callback that should be call in case of fail
+	 * @author Matanya
+	 */
+	me.sprayPuddles = function(mapInstanceId, puddlesIds, cbSuccess, cbFail)
+	{
+		setTimeout(function(){
+			cbSuccess({});
+		}, Math.random()*100);
+	};
+
 	const _data = {
 		id: 'random1234', // id of current "instance" of the level: this current instance of the level of this user, etc.
 		stats: {

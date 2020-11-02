@@ -10,5 +10,17 @@ const HouseModel = Backbone.Model.extend(
 	{
 		pos: null
 		,id: null
-	}
+	},
+	spray ()
+	{
+		this.set('spray', 7);
+	},
+	dayPass ()
+	{
+		const spray = this.get('spray');
+		if (spray) {
+			this.set('spray', spray - 1);
+		}
+	},
+
 });

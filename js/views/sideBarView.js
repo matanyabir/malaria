@@ -4,7 +4,8 @@ const SideBarView = Backbone.View.extend(
 
 	events: {
 		"click .search-all": "searchAllClick",
-		"click .spray": "sprayClick",
+		"click .s-puddle": "sprayPuddleClick",
+		"click .s-house": "sprayHouseClick",
 	},
 
 	searchAllCost () {
@@ -12,10 +13,16 @@ const SideBarView = Backbone.View.extend(
 		return 4000;
 	},
 
-	sprayCost () {
+	sprayPuddleCost () {
 		//TBD use "rules"
 		const kpisModel = this.model.get('kpisModel');
 		return 100 * kpisModel.get('visiblePuddles');
+	},
+
+	sprayHouseCost () {
+		//TBD use "rules"
+		const houses = this.model.get('houses');
+		return 10 * houses.length;
 	},
 
 	initialize ()
@@ -35,10 +42,13 @@ const SideBarView = Backbone.View.extend(
 			.append('<span class="kpi-img ill-mos"></span>').append(this.$illMos);
 		this.$actions = $('<div class="actions-container container"></div>');
 		this.$searchAllButton = $('<div class="action"><button class="search-all"></button><span class="cost">' + Utils.numTxt(this.searchAllCost())+'$</span></div>');
-		this.$sprayCost = $('<span class="cost"></span>');
-		this.$sprayButton = $('<div class="action"><button class="spray"></button></div>');
-		this.$sprayButton.append(this.$sprayCost);
-		this.$actions.append(this.$searchAllButton).append(this.$sprayButton);
+		this.$sprayPuddleCost = $('<span class="cost"></span>');
+		this.$sprayPuddleButton = $('<div class="action"><button class="spray s-puddle"></button></div>');
+		this.$sprayPuddleButton.append(this.$sprayPuddleCost);
+		this.$sprayHouseCost = $('<span class="cost"></span>');
+		this.$sprayHouseButton = $('<div class="action"><button class="spray s-house"></button></div>');
+		this.$sprayHouseButton.append(this.$sprayHouseCost);
+		this.$actions.append(this.$searchAllButton).append(this.$sprayPuddleButton).append(this.$sprayHouseButton);
 		this.$el.append(this.$data).append(this.$actions);
 		const kpisModel = this.model.get('kpisModel');
 		kpisModel.on('change:visiblePuddles', this.onVisiblePuddlesChange, this);
@@ -127,29 +137,45 @@ const SideBarView = Backbone.View.extend(
 		this.model.searchPuddles(this.searchAllCost());
 	},
 
-	sprayClick ()
+	sprayPuddleClick ()
 	{
-		this.model.spray(this.sprayCost());
+		this.model.sprayPuddles(this.sprayPuddleCost());
+	},
+
+	sprayHouseClick ()
+	{
+		this.model.sprayHouses(this.sprayHouseCost());
 	},
 
 	onVisiblePuddlesChange ()
 	{
-		this.calcSprayCost();
+		this.calcSprayPuddleCost();
 		this.calcPud();
 	},
-	calcSprayCost ()
+	calcSprayPuddleCost ()
 	{
-		const cost = this.sprayCost();
+		const cost = this.sprayPuddleCost();
 		if (cost) {
-			this.$sprayCost.text(Utils.numTxt(cost) + "$");
+			this.$sprayPuddleCost.text(Utils.numTxt(cost) + "$");
 		} else {
-			this.$sprayCost.text("No visible puddles...");
+			this.$sprayPuddleCost.text("N/A"); // no visible puddles...
 		}
 		const disable = !cost || this.model.get('cash') - cost < 0;
 		if (disable) {
-			this.$sprayButton.addClass('disabled');
+			this.$sprayPuddleButton.addClass('disabled');
 		} else {
-			this.$sprayButton.removeClass('disabled');
+			this.$sprayPuddleButton.removeClass('disabled');
+		}
+	},
+	calcSprayHouseCost ()
+	{
+		const cost = this.sprayHouseCost();
+		this.$sprayHouseCost.text(Utils.numTxt(cost) + "$");
+		const disable = this.model.get('cash') - cost < 0;
+		if (disable) {
+			this.$sprayHouseCost.addClass('disabled');
+		} else {
+			this.$sprayHouseCost.removeClass('disabled');
 		}
 	},
 	calcSearchCost ()
@@ -167,7 +193,8 @@ const SideBarView = Backbone.View.extend(
 		this.$cash.text(Utils.numTxt(cash) + "$");
 
 		this.calcSearchCost();
-		this.calcSprayCost();
+		this.calcSprayPuddleCost();
+		this.calcSprayHouseCost();
 	},
 
 });
