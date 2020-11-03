@@ -125,14 +125,14 @@ const Service = (function()
 				id: "p1",
 				loc: LOCATION.INSIDE_VILLAGE,
 				pos : {x: 300, y:120},
-				// state per period:
+				// state per period (Seasonal):
 				states: [PUDDLE_STATE.STRONG, PUDDLE_STATE.EMPTY, PUDDLE_STATE.STRONG, PUDDLE_STATE.EMPTY],
 			},
 			{
 				id: "p2",
 				loc: LOCATION.OUTSIDE_VILLAGE,
 				pos : {x: 700, y:120},
-				// state per period:
+				// state per period (Seasonal):
 				states: [PUDDLE_STATE.WEAK, PUDDLE_STATE.EMPTY, PUDDLE_STATE.EMPTY, PUDDLE_STATE.EMPTY],
 			},
 			{
@@ -140,7 +140,7 @@ const Service = (function()
 				id: "p3",
 				loc: LOCATION.OUTSIDE_VILLAGE,
 				pos : {x: 880, y:220},
-				// state per period:
+				// state per period (Seasonal):
 				states: [PUDDLE_STATE.EMPTY, PUDDLE_STATE.EMPTY, PUDDLE_STATE.WEAK, PUDDLE_STATE.EMPTY],
 			},
 			{
@@ -148,7 +148,7 @@ const Service = (function()
 				id: "p4",
 				loc: LOCATION.OUTSIDE_VILLAGE,
 				pos : {x: 180, y:720},
-				// state per period:
+				// state per period (Seasonal):
 				states: [PUDDLE_STATE.EMPTY, PUDDLE_STATE.WEAK, PUDDLE_STATE.WEAK, PUDDLE_STATE.WEAK],
 			},
 			{
@@ -156,29 +156,36 @@ const Service = (function()
 				id: "p5",
 				loc: LOCATION.OUTSIDE_VILLAGE,
 				pos : {x: 1020, y:720},
-				// state per period:
-				states: [PUDDLE_STATE.EMPTY, PUDDLE_STATE.WEAK, PUDDLE_STATE.WEAK, PUDDLE_STATE.WEAK],
+				// state per period (Seasonal):
+				states: [PUDDLE_STATE.EMPTY, PUDDLE_STATE.WEAK, PUDDLE_STATE.STRONG, PUDDLE_STATE.EMPTY],
 			},
 			{
 				id: "p6",
 				loc: LOCATION.OUTSIDE_VILLAGE,
 				pos : {x: 200, y:1020},
-				// state per period:
+				// state per period (Seasonal):
 				states: [PUDDLE_STATE.STRONG, PUDDLE_STATE.WEAK, PUDDLE_STATE.STRONG, PUDDLE_STATE.WEAK],
 			},
 			{
 				id: "p7",
 				loc: LOCATION.OUTSIDE_VILLAGE,
 				pos : {x: 1100, y:1220},
-				// state per period:
+				// state per period (Seasonal):
 				states: [PUDDLE_STATE.STRONG, PUDDLE_STATE.WEAK, PUDDLE_STATE.STRONG, PUDDLE_STATE.EMPTY],
 			},
 			{
 				id: "p8",
 				loc: LOCATION.INSIDE_VILLAGE,
 				pos : {x: 60, y:40},
-				// state per period:
-				states: [PUDDLE_STATE.STRONG, PUDDLE_STATE.STRONG, PUDDLE_STATE.STRONG, PUDDLE_STATE.STRONG],
+				// state (not seasonal):
+				state: PUDDLE_STATE.STRONG,
+			},
+            {
+				id: "p9",
+				loc: LOCATION.INSIDE_VILLAGE,
+				pos : {x: 95, y:22},
+				// state (not seasonal):
+				state: PUDDLE_STATE.WEAK,
 			},
 
 		],

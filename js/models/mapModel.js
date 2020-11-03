@@ -82,8 +82,6 @@ const MapModel = Backbone.Model.extend(
 				return;
 			}
 			if (this.get('periodIndex') !== periodIndex) {
-				kpisModel.set('visiblePuddles', 0);
-				// this.get('puddles').each( model => model.set({periodIndex}));
 				this.get('puddles').each( model => model.set({periodIndex}));
 				this.set({periodIndex});
 				this.updatePuddlesCount();
@@ -155,13 +153,18 @@ const MapModel = Backbone.Model.extend(
 	,updatePuddlesCount ()
 	{
 		let puddles = 0;
+		let visiblePuddles = 0;
 		this.get('puddles').each( model => {
 			if (model.get('state') !== PUDDLE_STATE.EMPTY) {
 				puddles++;
+				if (model.get('visible')) {
+					visiblePuddles++;
+				}
 			}
 		});
 		const kpisModel = this.get('kpisModel');
-		kpisModel.set({puddles});
+
+		kpisModel.set({puddles, visiblePuddles});
 	}
 
 });

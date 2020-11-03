@@ -36,8 +36,10 @@ const PuddleModel = Backbone.Model.extend(
 	{
 		const periodIndex = this.get('periodIndex');
 		const states = this.get('states');
-		const state = states[periodIndex];
-		this.set({state, visible: false, spray: null}); // TBD: delete also risusim, eggs, etc.?
+		if (states) {
+			const state = states[periodIndex];
+			this.set({state});
+		}
 	},
 	found: function ()
 	{
