@@ -158,14 +158,32 @@ button:hover {
 	padding-bottom: 0;
 	border-bottom: 1px #1b038a solid;
 }
-.search-all {
+.search-puddles {
 	display: inline-block;
-	width: 40px;
+	position: relative;
+	width: 80px;
 	height: 40px;
-	background-position: 50% 50%;
+	background-position: 5px 50%;
 	background-repeat: no-repeat;
 	background-image: url("../svgs/all/drone.svg");
 	background-size: 35px 35px;
+}
+.search-puddles::before {
+	content: "";
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: 45px 50%;
+}
+.search-in::before {
+	background-image: url("../svgs/all/village.svg");
+}
+.search-out::before {
+	background-image: url("../svgs/all/jungle.svg");
 }
 .spray {
 	display: inline-block;

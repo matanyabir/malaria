@@ -21,29 +21,15 @@ const MapModel = Backbone.Model.extend(
 	*/
 	,buildFromJson (data)
 	{
-		const {size, time, cash, kpis, id} = data;
-		// const mosquitoes = new MosquitoesCollection;
+		const {size, time, cash, kpis, costs, id} = data;
 		const houses = new HousesCollection;
-		// const humans = new HumansCollection;
 		const puddles = new PuddlesCollection;
-		// if (data.mosquitoes) {
-		// 	data.mosquitoes.forEach((item) => {
-		// 		const model = new MosquitoModel(item);
-		// 		mosquitoes.add(model);
-		// 	});
-		// }
 		if (data.houses) {
 			data.houses.forEach((item) => {
 				const model = new HouseModel(item);
 				houses.add(model);
 			});
 		}
-		// if (data.humans) {
-		// 	data.humans.forEach((item) => {
-		// 		const model = new HumanModel(item);
-		// 		humans.add(model);
-		// 	});
-		// }
 		if (data.puddles) {
 			data.puddles.forEach((item) => {
 				// item.periodIndex = 0;
@@ -53,8 +39,8 @@ const MapModel = Backbone.Model.extend(
 			});
 		}
 		const kpisModel = new KpisModel(kpis);
-		// this.set({size, time, cash, mosquitoes, houses, humans, puddles, kpisModel, id});
-		this.set({size, time, cash, houses, puddles, kpisModel, id});
+		const costsModel = new KpisModel(costs);
+		this.set({size, time, cash, houses, puddles, kpisModel, costsModel, id});
 		this.updatePuddlesCount();
 		return this;
 	}
@@ -117,15 +103,17 @@ const MapModel = Backbone.Model.extend(
 	    const periodIndex = this.get('periodIndex');
 	    return periods[periodIndex];
 	}
-	,searchPuddles (cost)
+	,searchPuddles (cost, loc)
 	{
 		const cash = this.get('cash') - cost;
 		this.set({cash});
 		let puddlesFound = 0;
 		this.get('puddles').each( model => {
-			const isFound = model.found();
-			if (isFound) {
-				puddlesFound++;
+			if (model.get('loc') === loc) {
+				const isFound = model.found();
+				if (isFound) {
+					puddlesFound++;
+				}
 			}
 		});
 		if (puddlesFound) {
