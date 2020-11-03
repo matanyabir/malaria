@@ -134,6 +134,9 @@ button:hover {
 .kpi-img.pop {
 	background-image: url("../svgs/all/multiple-users-silhouette.svg");
 }
+.kpi-img.hos {
+	background-image: url("../svgs/all/black-house.svg");
+}
 .kpi-img.ill {
 	background-image: url("../svgs/all/red-men.svg");
 	/*background-image: url("../svgs/all/ill.svg");*/
@@ -207,10 +210,10 @@ button:hover {
 	background-position: 45px 50%;
 }
 .s-puddle::before {
-	background-image: url("../svgs/all/lake.svg");
+	background-image: url("../svgs/all/black-lake.svg");
 }
 .s-house::before {
-	background-image: url("../svgs/all/wood-house.svg");
+	background-image: url("../svgs/all/black-house.svg");
 }
 .cost {
 	margin-left: 5px;

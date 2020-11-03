@@ -36,12 +36,14 @@ const SideBarView = Backbone.View.extend(
 		this.$data = $('<div class="data-container container"></div>');
 		this.$cash = $('<span class="kpi-txt"></span>');
 		this.$pud = $('<span class="kpi-txt"></span>');
+		this.$hos = $('<span class="kpi-txt"></span>');
 		this.$pop = $('<span class="kpi-txt"></span>');
 		this.$ill = $('<span class="kpi-txt"></span>');
 		this.$mos = $('<span class="kpi-txt"></span>');
 		this.$illMos = $('<span class="kpi-txt"></span>');
 		this.$data.append('<span class="kpi-img cash"></span>').append(this.$cash)
 			.append('<span class="kpi-img pud"></span>').append(this.$pud)
+			.append('<span class="kpi-img hos"></span>').append(this.$hos)
 			.append('<span class="kpi-img pop"></span>').append(this.$pop)
 			.append('<span class="kpi-img ill"></span>').append(this.$ill)
 			.append('<span class="kpi-img mos"></span>').append(this.$mos)
@@ -73,6 +75,7 @@ const SideBarView = Backbone.View.extend(
 	{
 		this.calcPud();
 		this.calcPop();
+		this.calcHos();
 		this.calcIll();
 		this.calcMos();
 		this.calcIllMos();
@@ -101,6 +104,12 @@ const SideBarView = Backbone.View.extend(
 		const kpisModel = this.model.get('kpisModel');
 		const count = Utils.numTxt(kpisModel.get('population'));
 		this.$pop.text(count);
+	},
+	calcHos ()
+	{
+		const houses = this.model.get('houses');
+		const count = Utils.numTxt(houses.length);
+		this.$hos.text(count);
 	},
 	calcIll ()
 	{
