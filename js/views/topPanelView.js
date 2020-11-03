@@ -85,10 +85,8 @@ const TopPanelView = Backbone.View.extend(
 
 	playPauseClick ()
 	{
-		if (this.model.get('play'))
-		{
-			this.model.set('play', false);
-			this.$playPauseButton.removeClass('playing');
+		if (this.model.get('play')) {
+			this.pause();
 		} else {
 			this.startPlay(9999);
 		}
@@ -99,18 +97,26 @@ const TopPanelView = Backbone.View.extend(
 		this.model.incDay();
 	},
 
+	pause ()
+	{
+		this.model.set('play', false);
+		this.$playPauseButton.removeClass('playing');
+	},
+
 	startPlay (max)
 	{
 		this.model.set('play', true);
 		this.$playPauseButton.addClass('playing');
 		const incDay = ()=> {
 			max--;
-			if (max && this.model.get('play')) {
+			if (max === 0) {
+				this.pause();
+			}
+			else if (this.model.get('play')) {
 				this.model.incDay(incDay);
 			}
 		};
 		incDay();
-
 	},
 
 	nextMonthClick ()
