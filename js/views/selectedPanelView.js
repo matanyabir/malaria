@@ -98,9 +98,9 @@ const SelectedPanelView = Backbone.View.extend(
 	{
 		const cash = this.model.get('cash');
 		if (cash - this.sprayPuddleCost() < 0) {
-			this.$sprayHouseButton.addClass('disabled');
+			this.$sprayPuddleButton.addClass('disabled');
 		} else {
-			this.$sprayHouseButton.removeClass('disabled');
+			this.$sprayPuddleButton.removeClass('disabled');
 		}
 		if (cash - this.sprayHouseCost() < 0) {
 			this.$sprayHouseButton.addClass('disabled');
