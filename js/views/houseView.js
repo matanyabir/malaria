@@ -1,6 +1,6 @@
 const HouseView = Backbone.View.extend({
 
-	className: 'house',
+	className: 'house map-item',
 	initialize ()
 	{
 		this.model.on('change:spray', this.renderSpray, this);

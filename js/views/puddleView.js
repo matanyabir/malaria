@@ -1,6 +1,6 @@
 const PuddleView = Backbone.View.extend({
 
-	className: 'puddle',
+	className: 'puddle map-item',
 
 	events: {
 		"click": "onClick",

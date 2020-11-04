@@ -300,28 +300,30 @@ button:hover {
 	background: #b7a51a;
 	/*background: #a58433;*/
 }
-.selected {
-	box-shadow: 0 0 20px rgb(255,255,55), inset 0 0 10px rgba(255,255,55,0.5);
+/*.selected {*/
+/*	box-shadow: 0 0 20px rgb(255,255,55), inset 0 0 10px rgba(255,255,55,0.5);*/
+/*}*/
+.map-item {
+	transition: 0.4s ease-in-out transform;
+	cursor: pointer;
+	position: absolute;
+	width: 26px;
+	height: 26px;
+	margin-left: -13px;
+	margin-top: -13px;
+	background-size: 26px 26px;
+}
+.map-item:hover {
+	transform: scale(1.3);
+}
+.map-item.selected {
+	 transform: scale(1.6);
 }
 .house {
-	cursor: pointer;
-	position: absolute;
-	width: 26px;
-	height: 26px;
-	margin-left: -13px;
-	margin-top: -13px;
 	background-image: url("../svgs/all/wood-house.svg");
-	background-size: 26px 26px;
 }
 .puddle {
-	cursor: pointer;
-	position: absolute;
-	width: 26px;
-	height: 26px;
-	margin-left: -13px;
-	margin-top: -13px;
 	background-image: url("../svgs/all/lake.svg");
-	background-size: 26px 26px;
 }
 .spry {
 	position: absolute;
@@ -339,10 +341,7 @@ button:hover {
 }
 .puddle[data-state="2"]
 {
-	transform: scale(1.7);
-	/*width: 45px;*/
-	/*height: 45px;*/
-	/*background-size: 45px 45px;*/
+	background-image: url("../svgs/all/strong-lake.svg");
 }
 .puddle[data-state="0"]
 {
