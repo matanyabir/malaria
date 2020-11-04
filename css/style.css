@@ -183,12 +183,44 @@ button:hover {
 	/*bottom: 0;*/
 	height: 350px;
 	left: -220px;
-	width: 180px;
-	padding: 10px;
+	width: 200px;
 	background: #84e6e3;
 }
 .selected-panel.show-selected {
 	left: 0;
+}
+.big-img {
+	position: relative;
+	height: 100px;
+	background: white;
+}
+.big-img>* {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	transition: 0.5s ease-in-out opacity;
+	opacity: 0;
+	background-size: cover;
+}
+.p-s-img {
+	background-image: url("../imgs/big-puddle.jpg");
+}
+.p-w-img {
+	background-image: url("../imgs/small-puddle.jpg");
+}
+.h-img {
+	background-image: url("../imgs/hut.jpg");
+}
+.selected-house .h-img {
+	opacity: 1;
+}
+.selected-puddle.strong-puddle .p-s-img {
+	opacity: 1;
+}
+.selected-puddle.weak-puddle .p-w-img {
+	opacity: 1;
 }
 .selected-title {
 	font-size: 18px;
