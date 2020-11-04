@@ -5,6 +5,7 @@
  */
 const PuddleModel = Backbone.Model.extend(
 {
+	elementType: "puddle",
 	// default values
 	defaults:
 	{

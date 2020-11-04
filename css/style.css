@@ -125,6 +125,15 @@ button:hover {
 	height: 30px;
 	background-size: 30px 30px;
 }
+.kpi-img.egg {
+	background-image: url("../svgs/all/eggs.svg");
+}
+.kpi-img.lar {
+	background-image: url("../svgs/all/larvae.svg");
+}
+.kpi-img.pup {
+	background-image: url("../svgs/all/popae.svg");
+}
 .kpi-img.cash {
 	background-image: url("../svgs/all/money.svg");
 }
@@ -161,6 +170,38 @@ button:hover {
 	padding-bottom: 0;
 	border-bottom: 1px #1b038a solid;
 }
+.actions-container {
+	position: relative;
+}
+.selected-panel {
+	color: #1b038a;
+	position: absolute;
+	transition: 0.5s ease-in-out left;
+	/*border: 1px #1b038a solid;*/
+	box-shadow: 0 0 10px #1b038a;
+	top: 0px;
+	/*bottom: 0;*/
+	height: 350px;
+	left: -220px;
+	width: 180px;
+	padding: 10px;
+	background: #84e6e3;
+}
+.selected-panel.show-selected {
+	left: 0;
+}
+.selected-title {
+	font-size: 18px;
+}
+.selected-sub-title {
+	font-size: 15px;
+}
+.selected-house .pud-container {
+	display: none;
+}
+.selected-puddle .hos-container {
+	display: none;
+}
 .search-puddles {
 	display: inline-block;
 	position: relative;
@@ -187,6 +228,16 @@ button:hover {
 }
 .search-out::before {
 	background-image: url("../svgs/all/jungle.svg");
+}
+.spray-item {
+	display: inline-block;
+	position: relative;
+	width: 40px;
+	height: 40px;
+	background-image: url("../svgs/all/spray-bottle.svg");
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-size: 35px 35px;
 }
 .spray {
 	display: inline-block;
@@ -249,7 +300,11 @@ button:hover {
 	background: #b7a51a;
 	/*background: #a58433;*/
 }
+.selected {
+	box-shadow: 0 0 20px rgb(255,255,55), inset 0 0 10px rgba(255,255,55,0.5);
+}
 .house {
+	cursor: pointer;
 	position: absolute;
 	width: 26px;
 	height: 26px;
@@ -259,6 +314,7 @@ button:hover {
 	background-size: 26px 26px;
 }
 .puddle {
+	cursor: pointer;
 	position: absolute;
 	width: 26px;
 	height: 26px;

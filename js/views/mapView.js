@@ -5,6 +5,9 @@ const MapView = Backbone.View.extend({
 		this.model.on('change:periodIndex', this.renderPeriod, this);
 		return this;
 	},
+	events: {
+		"click": "onClick",
+	},
 	render: function ()
 	{
 		this.renderPeriod();
@@ -49,4 +52,9 @@ const MapView = Backbone.View.extend({
 		const {width, height} = this.model.get('size');
 		this.$el.css({width, height});
 	},
+	onClick ()
+	{
+		this.model.setSelected(null);
+	},
+
 });

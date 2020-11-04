@@ -35,6 +35,11 @@ const Service = (function()
 			if (Math.random()>0.9) {
 				kpis.ill++;
 			}
+			_.forEach(kpis.puddlesMap, (p) => {
+				p.e = Math.floor(Math.random()*25);
+				p.l = Math.floor(Math.random()*20);
+				p.p = Math.floor(Math.random()*15);
+			});
 			kpis.mosquitoes = Math.floor(kpis.mosquitoes * (1 + Math.random()/30));
 			kpis.illMosquitoes = Math.floor(kpis.illMosquitoes * (1 + Math.random()/50));
 			cbSuccess(kpis);
@@ -93,6 +98,54 @@ const Service = (function()
 			ill: 17, // current amount of ill humans
 			mosquitoes: 20170, // current amount of mosquitoes
 			illMosquitoes: 1808, // current amount of ill mosquitoes
+			puddlesMap: { // map of count of eggs, lavraes, popaes per puddle id
+				p1: {
+					e: 7,
+					l: 3,
+					r: 2
+				},
+				p2: {
+					e: 0,
+					l: 3,
+					r: 5
+				},
+				p3: {
+					e: 1,
+					l: 1,
+					r: 2
+				},
+				p4: {
+					e: 6,
+					l: 6,
+					r: 4
+				},
+				p5: {
+					e: 3,
+					l: 9,
+					r: 2
+				},
+				p6: {
+					e: 17,
+					l: 13,
+					r: 12
+				},
+				p7: {
+					e: 1,
+					l: 0,
+					r: 3
+				},
+				p8: {
+					e: 3,
+					l: 4,
+					r: 8
+				},
+				p9: {
+					e: 8,
+					l: 7,
+					r: 6
+				},
+
+			}
 		},
 		cash: 12500,
 		size: {

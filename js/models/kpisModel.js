@@ -14,6 +14,7 @@ const KpisModel = Backbone.Model.extend(
 		illMosquitoes: 0, // current amount of ill mosquitoes
 		puddles: 0, // current amount of puddles that are relevant now
 		visiblePuddles: 0, // current amount of puddles that are relevant now, and also founded
+		puddlesMap: {} // map of count of eggs, lavraes, popaes per puddle id
 	}
 
 });

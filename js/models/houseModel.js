@@ -5,6 +5,7 @@
  */
 const HouseModel = Backbone.Model.extend(
 {
+	elementType: "house",
 	// default values
 	defaults:
 	{

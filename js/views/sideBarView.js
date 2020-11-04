@@ -57,7 +57,12 @@ const SideBarView = Backbone.View.extend(
 		this.$sprayHouseCost = $('<span class="cost"></span>');
 		this.$sprayHouseButton = $('<div class="action"><button class="spray s-house"></button></div>');
 		this.$sprayHouseButton.append(this.$sprayHouseCost);
-		this.$actions.append(this.$searchInButton).append(this.$searchOutButton).append(this.$sprayPuddleButton).append(this.$sprayHouseButton);
+		const view = new SelectedPanelView({model: this.model});
+		this.$actions.append(this.$searchInButton)
+			.append(this.$searchOutButton)
+			.append(this.$sprayPuddleButton)
+			.append(this.$sprayHouseButton)
+			.append(view.render().$el);
 		this.$el.append(this.$data).append(this.$actions);
 		const kpisModel = this.model.get('kpisModel');
 		kpisModel.on('change:visiblePuddles', this.onVisiblePuddlesChange, this);

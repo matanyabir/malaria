@@ -27,6 +27,7 @@ const MapModel = Backbone.Model.extend(
 		if (data.houses) {
 			data.houses.forEach((item) => {
 				const model = new HouseModel(item);
+				model.set('mapModel', this);
 				houses.add(model);
 			});
 		}
@@ -34,6 +35,7 @@ const MapModel = Backbone.Model.extend(
 			data.puddles.forEach((item) => {
 				// item.periodIndex = 0;
 				const model = new PuddleModel(item);
+				model.set('mapModel', this);
 				model.set("periodIndex", 0);
 				puddles.add(model);
 			});
@@ -63,6 +65,7 @@ const MapModel = Backbone.Model.extend(
 			this.set('loading', false);
 			const kpisModel = this.get('kpisModel');
 			kpisModel.set(kpis);
+			this.updateSelectedKpis();
 			let day = this.get('day') + 1;
 			this.set({day});
 			const {periods} = this.get('time');
@@ -135,7 +138,16 @@ const MapModel = Backbone.Model.extend(
 		Service.sprayPuddles(this.get('id'), puddlesIds, (kpis)=> {
 			this.set('loading', false);
 		});
-
+	}
+	,sprayPuddle (cost, model)
+	{
+		const cash = this.get('cash') - cost;
+		this.set({cash});
+		model.spray();
+		this.set('loading', true);
+		Service.sprayPuddles(this.get('id'), [model.get('id')], (kpis)=> {
+			this.set('loading', false);
+		});
 	}
 	,sprayHouses (cost)
 	{
@@ -148,7 +160,41 @@ const MapModel = Backbone.Model.extend(
 		Service.sprayHouses(this.get('id'), "all", (kpis)=> {
 			this.set('loading', false);
 		});
-
+	}
+	,sprayHouse (cost, model)
+	{
+		const cash = this.get('cash') - cost;
+		this.set({cash});
+		model.spray();
+		this.set('loading', true);
+		Service.sprayHouses(this.get('id'), [model.get('id')], (kpis)=> {
+			this.set('loading', false);
+		});
+	}
+	,setSelected (selectedItem)
+	{
+		const prevSelected = this.get('selectedItem');
+		if (prevSelected) {
+			prevSelected.set('selected', false);
+		}
+		if (selectedItem) {
+			selectedItem.set('selected', true);
+		}
+		this.set({selectedItem});
+		this.updateSelectedKpis();
+	}
+	,updateSelectedKpis ()
+	{
+		const selectedItem = this.get('selectedItem');
+		if (selectedItem) {
+			if (selectedItem.elementType === 'puddle') {
+				const kpisModel = this.get('kpisModel');
+				const p = kpisModel.get('puddlesMap')[selectedItem.get('id')];
+				this.set('selectedEggs', p.e || 0);
+				this.set('selectedLars', p.l || 0);
+				this.set('selectedPups', p.p || 0);
+			}
+		}
 	}
 	,updatePuddlesCount ()
 	{
