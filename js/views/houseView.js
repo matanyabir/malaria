@@ -24,7 +24,7 @@ const HouseView = Backbone.View.extend({
 	renderSpray ()
 	{
 		const spray = this.model.get('spray') || 0;
-		this.$spray.css({opacity: spray / 7});
+		this.$spray.css({opacity: spray / 120});
 	},
 	renderSelected ()
 	{

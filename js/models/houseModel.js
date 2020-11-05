@@ -14,7 +14,7 @@ const HouseModel = Backbone.Model.extend(
 	},
 	spray ()
 	{
-		this.set('spray', 7);
+		this.set('spray', 120);
 	},
 	dayPass ()
 	{

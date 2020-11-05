@@ -36,7 +36,8 @@ const TopPanelView = Backbone.View.extend(
 			.append(this.$mainStatus)
 			.append(this.$playPauseButton)
 			.append(this.$nextDayButton)
-			.append(this.$nextMonthButton);
+			.append(this.$nextMonthButton)
+			.append('<div class="logo">DETECT</div>');
 		this.model.on('change:day', this.renderDay, this);
 		this.model.on('change:loading', this.onLoadingChange, this);
 		this.model.on('change:end', this.renderStatus, this);

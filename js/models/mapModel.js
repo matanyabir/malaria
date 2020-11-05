@@ -144,6 +144,7 @@ const MapModel = Backbone.Model.extend(
 		const cash = this.get('cash') - cost;
 		this.set({cash});
 		model.spray();
+		this.set('selectedSpray', model.get('spray'));
 		this.set('loading', true);
 		Service.sprayPuddles(this.get('id'), [model.get('id')], (kpis)=> {
 			this.set('loading', false);
@@ -166,6 +167,7 @@ const MapModel = Backbone.Model.extend(
 		const cash = this.get('cash') - cost;
 		this.set({cash});
 		model.spray();
+		this.set('selectedSpray', model.get('spray'));
 		this.set('loading', true);
 		Service.sprayHouses(this.get('id'), [model.get('id')], (kpis)=> {
 			this.set('loading', false);
@@ -187,6 +189,8 @@ const MapModel = Backbone.Model.extend(
 	{
 		const selectedItem = this.get('selectedItem');
 		if (selectedItem) {
+			this.set('selectedId', selectedItem.get('id'));
+			this.set('selectedSpray', selectedItem.get('spray'));
 			if (selectedItem.elementType === 'puddle') {
 				const kpisModel = this.get('kpisModel');
 				const p = kpisModel.get('puddlesMap')[selectedItem.get('id')];

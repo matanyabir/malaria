@@ -22,6 +22,8 @@ const SelectedPanelView = Backbone.View.extend(
 		this.$img = $('<div class="big-img"><div class="p-s-img"></div><div class="p-w-img"></div><div class="h-img"></div></div>');
 		this.$container = $('<div class="container"></div>');
 		this.$title = $('<div class="selected-title"></div>');
+		this.$idTitle = $('<div class="selected-sub-title"></div>');
+		this.$sprayTitle = $('<div class="selected-sub-title"></div>');
 		this.$subTitle = $('<div class="selected-sub-title"></div>');
 		this.$sprayPuddleButton = $('<div class="action"><button class="spray-puddle spray-item"></button><span class="cost">' + Utils.numTxt(this.sprayPuddleCost())+'$</span></div>');
 		this.$sprayHouseButton = $('<div class="action"><button class="spray-house spray-item"></button><span class="cost">' + Utils.numTxt(this.sprayHouseCost())+'$</span></div>');
@@ -35,16 +37,33 @@ const SelectedPanelView = Backbone.View.extend(
 			.append('<span class="kpi-img pup"></span>').append(this.$pup)
 			.append('<span class="kpi-img lar"></span>').append(this.$lar)
 			.append(this.$sprayPuddleButton);
-		this.$container.append(this.$title).append(this.$pudContainer).append(this.$hosContainer);
+		this.$container.append(this.$title)
+			.append(this.$idTitle)
+			.append(this.$sprayTitle)
+			.append(this.$pudContainer)
+			.append(this.$hosContainer);
 		this.$el.append(this.$img).append(this.$container);
 		this.model.on('change:cash', this.onCashChange, this);
 		this.model.on('change:selectedItem', this.onSelectedChange, this);
+		this.model.on('change:selectedId', this.onSelectedIdChange, this);
+		this.model.on('change:selectedSpray', this.onSelectedSprayChange, this);
 		this.model.on('change:selectedEggs', this.onSelectedEggsChange, this);
 		this.model.on('change:selectedLars', this.onSelectedLavsChange, this);
 		this.model.on('change:selectedPups', this.onSelectedPopsChange, this);
 		return this;
 	},
 
+	onSelectedIdChange () {
+		this.$idTitle.text('ID:' + this.model.get('selectedId'));
+	},
+	onSelectedSprayChange () {
+		const selectedSpray = this.model.get('selectedSpray');
+		if (selectedSpray) {
+			this.$sprayTitle.text('Spray active for ' + selectedSpray + '  days more');
+		} else {
+			this.$sprayTitle.text('Not sprayed...');
+		}
+	},
 	onSelectedEggsChange () {
 		this.$egg.text(this.model.get('selectedEggs'));
 	},

@@ -133,7 +133,7 @@ const SideBarView = Backbone.View.extend(
 		const kpisModel = this.model.get('kpisModel');
 		const count = kpisModel.get('mosquitoes');
 		this.$mos.text(Utils.numTxt(count));
-		if (count>22000) // tbd rules
+		if (count>2100) // tbd rules
 		{
 			this.$mos.addClass('warning');
 		} else {
@@ -145,7 +145,7 @@ const SideBarView = Backbone.View.extend(
 		const kpisModel = this.model.get('kpisModel');
 		const count = kpisModel.get('illMosquitoes');
 		this.$illMos.text(Utils.numTxt(count));
-		if (count>2000) // tbd rules
+		if (count>250) // tbd rules
 		{
 			this.$illMos.addClass('warning');
 		} else {

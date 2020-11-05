@@ -22,6 +22,15 @@ button:hover {
 	height: 100px;
 	background: #8bbdbc;
 }
+.logo {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	font-size: 26px;
+	line-height: 26px;
+	color: #1b038a;
+	text-shadow: 2px 2px #6556ad;
+}
 .cal {
 	position: relative;
 	height: 10px;
