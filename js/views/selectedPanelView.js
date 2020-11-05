@@ -74,10 +74,11 @@ const SelectedPanelView = Backbone.View.extend(
 		this.$pup.text(this.model.get('selectedPups'));
 	},
 
-	// render ()
-	// {
-	// 	return this;
-	// },
+	render ()
+	{
+		this.onSelectedSprayChange();
+		return this;
+	},
 
 	onSelectedChange ()
 	{

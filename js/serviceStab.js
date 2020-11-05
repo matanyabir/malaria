@@ -33,7 +33,7 @@ const Service = (function()
 	{
 		setTimeout(function(){
 			days++;
-			if (days % 90) {
+			if (days % 90 === 0) {
 				wet = !wet;
 			}
 			const kpis = _data.kpis;
@@ -266,7 +266,7 @@ const Service = (function()
 
 			}
 		},
-		cash: 500,
+		cash: 600,
 		size: {
 			width: 1500,
 			height: 1400,

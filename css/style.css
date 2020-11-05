@@ -26,10 +26,10 @@ button:hover {
 	position: absolute;
 	right: 10px;
 	top: 10px;
-	font-size: 26px;
-	line-height: 26px;
+	font-size: 52px;
+	line-height: 52px;
 	color: #1b038a;
-	text-shadow: 2px 2px #6556ad;
+	text-shadow: 4px 4px #6556ad;
 }
 .cal {
 	position: relative;

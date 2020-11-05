@@ -199,9 +199,9 @@ const SideBarView = Backbone.View.extend(
 		this.$sprayHouseCost.text(Utils.numTxt(cost) + "$");
 		const disable = this.model.get('cash') - cost < 0;
 		if (disable) {
-			this.$sprayHouseCost.addClass('disabled');
+			this.$sprayHouseButton.addClass('disabled');
 		} else {
-			this.$sprayHouseCost.removeClass('disabled');
+			this.$sprayHouseButton.removeClass('disabled');
 		}
 	},
 	calcSearchCost ()
