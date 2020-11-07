@@ -104,14 +104,14 @@ const MapModel = Backbone.Model.extend(
 	    const periodIndex = this.get('periodIndex');
 	    return periods[periodIndex];
 	}
-	,searchPuddles (cost, loc)
+	,searchPuddles (cost, loc, isSatellite)
 	{
 		const cash = this.get('cash') - cost;
 		this.set({cash});
 		let puddlesFound = 0;
 		this.get('puddles').each( model => {
 			if (model.get('loc') === loc) {
-				const isFound = model.found();
+				const isFound = model.found(isSatellite);
 				if (isFound) {
 					puddlesFound++;
 				}

@@ -101,6 +101,8 @@ const Service = (function()
 			tbd: "can override many rules, e.g.: death-rate of mosquitoes"
 		},
         costs: 	{
+            searchVillageSatellite: 5, // cost of search puddles inside the village with satellite
+            searchOutSatellite: 25, // cost of search puddles outside the village with satellite
             searchVillage: 50, // cost of search puddles inside the village
             searchOut: 250, // cost of search puddles outside the village
             sprayHouse: 30, // cost of spray 1 house
@@ -295,6 +297,7 @@ const Service = (function()
 		puddles: [
 			{
 				id: "p0",
+				isSatellite: true, // can be found with satellite
 				loc: LOCATION.OUTSIDE_VILLAGE,
 				pos : {x: 728, y:160},
 				// state per period (Seasonal):
@@ -302,6 +305,7 @@ const Service = (function()
 			},
 			{
 				id: "p1",
+				isSatellite: true, // can be found with satellite
 				loc: LOCATION.INSIDE_VILLAGE,
 				pos : {x: 300, y:120},
 				// state per period (Seasonal):
@@ -309,6 +313,7 @@ const Service = (function()
 			},
 			{
 				id: "p2",
+				isSatellite: true, // can be found with satellite
 				loc: LOCATION.OUTSIDE_VILLAGE,
 				pos : {x: 700, y:120},
 				// state per period (Seasonal):
@@ -317,6 +322,7 @@ const Service = (function()
 			{
 				// note: this puddle will appear only at 3rd period
 				id: "p3",
+				isSatellite: true, // can be found with satellite
 				loc: LOCATION.OUTSIDE_VILLAGE,
 				pos : {x: 880, y:220},
 				// state per period (Seasonal):
@@ -325,6 +331,7 @@ const Service = (function()
 			{
 				// note: this puddle will appear only at 2nd period
 				id: "p4",
+				isSatellite: true, // can be found with satellite
 				loc: LOCATION.OUTSIDE_VILLAGE,
 				pos : {x: 180, y:720},
 				// state per period (Seasonal):
@@ -333,6 +340,7 @@ const Service = (function()
 			{
 				// note: this puddle will appear only at 2nd period
 				id: "p5",
+				isSatellite: true, // can be found with satellite
 				loc: LOCATION.OUTSIDE_VILLAGE,
 				pos : {x: 1020, y:720},
 				// state per period (Seasonal):
@@ -340,6 +348,7 @@ const Service = (function()
 			},
 			{
 				id: "p6",
+				isSatellite: true, // can be found with satellite
 				loc: LOCATION.OUTSIDE_VILLAGE,
 				pos : {x: 200, y:1020},
 				// state per period (Seasonal):
@@ -347,6 +356,7 @@ const Service = (function()
 			},
 			{
 				id: "p7",
+				isSatellite: true, // can be found with satellite
 				loc: LOCATION.OUTSIDE_VILLAGE,
 				pos : {x: 1100, y:1220},
 				// state per period (Seasonal):
@@ -354,6 +364,7 @@ const Service = (function()
 			},
 			{
 				id: "p8",
+				isSatellite: true, // can be found with satellite
 				loc: LOCATION.INSIDE_VILLAGE,
 				pos : {x: 60, y:40},
 				// state (not seasonal):
@@ -361,6 +372,7 @@ const Service = (function()
 			},
             {
 				id: "p9",
+				isSatellite: true, // can be found with satellite
 				loc: LOCATION.INSIDE_VILLAGE,
 				pos : {x: 95, y:22},
 				// state (not seasonal):
@@ -368,6 +380,7 @@ const Service = (function()
 			},
 			{
 				id: "p10",
+				isSatellite: true, // can be found with satellite
 				loc: LOCATION.OUTSIDE_VILLAGE,
 				pos : {x: 810, y:150},
 				// state per period (Seasonal):
@@ -375,6 +388,7 @@ const Service = (function()
 			},
 			{
 				id: "p11",
+				isSatellite: true, // can be found with satellite
 				loc: LOCATION.INSIDE_VILLAGE,
 				pos : {x: 280, y:150},
 				// state per period (Seasonal):
@@ -382,6 +396,7 @@ const Service = (function()
 			},
 			{
 				id: "p12",
+				isSatellite: true, // can be found with satellite
 				loc: LOCATION.OUTSIDE_VILLAGE,
 				pos : {x: 600, y:90},
 				// state per period (Seasonal):
@@ -390,6 +405,7 @@ const Service = (function()
 			{
 				// note: this puddle will appear only at 3rd period
 				id: "p13",
+				isSatellite: true, // can be found with satellite
 				loc: LOCATION.OUTSIDE_VILLAGE,
 				pos : {x: 880, y:220},
 				// state per period (Seasonal):
@@ -398,6 +414,7 @@ const Service = (function()
 			{
 				// note: this puddle will appear only at 2nd period
 				id: "p14",
+				isSatellite: true, // can be found with satellite
 				loc: LOCATION.OUTSIDE_VILLAGE,
 				pos : {x: 1180, y:290},
 				// state per period (Seasonal):

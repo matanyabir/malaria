@@ -14,6 +14,7 @@ const PuddleModel = Backbone.Model.extend(
 		,state: null // current state PUDDLE_STATE
 		,loc: LOCATION.INSIDE_VILLAGE
 		,visible: false
+		,isSatellite: false // can be found with satellite
 	},
 
 	initialize ()
@@ -42,9 +43,9 @@ const PuddleModel = Backbone.Model.extend(
 			this.set({state});
 		}
 	},
-	found: function ()
+	found: function (isSatellite)
 	{
-		if (!this.get("visible") && this.get('state') !== PUDDLE_STATE.EMPTY) {
+		if (!this.get("visible") && this.get('state') !== PUDDLE_STATE.EMPTY && (!isSatellite || this.get('isSatellite'))) {
 			this.set({visible: true});
 			return true;
 		}

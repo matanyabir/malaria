@@ -3,10 +3,22 @@ const SideBarView = Backbone.View.extend(
 	className: 'panel',
 
 	events: {
-		"click .search-in": "searchInClick",
-		"click .search-out": "searchOutClick",
+		"click .search-drone.search-in": "searchInClick",
+		"click .search-drone.search-out": "searchOutClick",
+		"click .search-satellite.search-in": "searchInSatelliteClick",
+		"click .search-satellite.search-out": "searchOutSatelliteClick",
 		"click .s-puddle": "sprayPuddleClick",
 		"click .s-house": "sprayHouseClick",
+	},
+
+	searchInSatelliteCost () {
+		const costsModel = this.model.get('costsModel');
+		return costsModel.get('searchVillageSatellite');
+	},
+
+	searchOutSatelliteCost () {
+		const costsModel = this.model.get('costsModel');
+		return costsModel.get('searchOutSatellite');
 	},
 
 	searchInCost () {
@@ -49,8 +61,10 @@ const SideBarView = Backbone.View.extend(
 			.append('<span class="kpi-img mos"></span>').append(this.$mos)
 			.append('<span class="kpi-img ill-mos"></span>').append(this.$illMos);
 		this.$actions = $('<div class="actions-container container"></div>');
-		this.$searchInButton = $('<div class="action"><button class="search-puddles search-in"></button><span class="cost">' + Utils.numTxt(this.searchInCost())+'$</span></div>');
-		this.$searchOutButton = $('<div class="action"><button class="search-puddles search-out"></button><span class="cost">' + Utils.numTxt(this.searchOutCost())+'$</span></div>');
+		this.$searchInButton = $('<div class="action"><button class="search-puddles search-drone search-in"></button><span class="cost">' + Utils.numTxt(this.searchInCost())+'$</span></div>');
+		this.$searchOutButton = $('<div class="action"><button class="search-puddles search-drone search-out"></button><span class="cost">' + Utils.numTxt(this.searchOutCost())+'$</span></div>');
+		this.$searchInSatelliteButton = $('<div class="action"><button class="search-puddles search-satellite search-in"></button><span class="cost">' + Utils.numTxt(this.searchInSatelliteCost())+'$</span></div>');
+		this.$searchOutSatelliteButton = $('<div class="action"><button class="search-puddles search-satellite search-out"></button><span class="cost">' + Utils.numTxt(this.searchOutSatelliteCost())+'$</span></div>');
 		this.$sprayPuddleCost = $('<span class="cost"></span>');
 		this.$sprayPuddleButton = $('<div class="action"><button class="spray s-puddle"></button></div>');
 		this.$sprayPuddleButton.append(this.$sprayPuddleCost);
@@ -60,6 +74,8 @@ const SideBarView = Backbone.View.extend(
 		const view = new SelectedPanelView({model: this.model});
 		this.$actions.append(this.$searchInButton)
 			.append(this.$searchOutButton)
+			.append(this.$searchInSatelliteButton)
+			.append(this.$searchOutSatelliteButton)
 			.append(this.$sprayPuddleButton)
 			.append(this.$sprayHouseButton)
 			.append(view.render().$el);
@@ -163,6 +179,16 @@ const SideBarView = Backbone.View.extend(
 		this.model.searchPuddles(this.searchOutCost(), LOCATION.OUTSIDE_VILLAGE);
 	},
 
+	searchInSatelliteClick ()
+	{
+		this.model.searchPuddles(this.searchInSatelliteCost(), LOCATION.INSIDE_VILLAGE, true);
+	},
+
+	searchOutSatelliteClick ()
+	{
+		this.model.searchPuddles(this.searchOutSatelliteCost(), LOCATION.OUTSIDE_VILLAGE, true);
+	},
+
 	sprayPuddleClick ()
 	{
 		this.model.sprayPuddles(this.sprayPuddleCost());
@@ -216,6 +242,16 @@ const SideBarView = Backbone.View.extend(
 			this.$searchOutButton.addClass('disabled');
 		} else {
 			this.$searchOutButton.removeClass('disabled');
+		}
+		if (cash - this.searchInSatelliteCost() < 0) {
+			this.$searchInSatelliteButton.addClass('disabled');
+		} else {
+			this.$searchInSatelliteButton.removeClass('disabled');
+		}
+		if (cash - this.searchOutSatelliteCost() < 0) {
+			this.$searchOutSatelliteButton.addClass('disabled');
+		} else {
+			this.$searchOutSatelliteButton.removeClass('disabled');
 		}
 	},
 	onCashChange ()

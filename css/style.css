@@ -243,6 +243,12 @@ button:hover {
 .selected-puddle .hos-container {
 	display: none;
 }
+.search-drone {
+	background-image: url("../svgs/all/drone.svg");
+}
+.search-satellite {
+	background-image: url("../svgs/all/satellite.svg");
+}
 .search-puddles {
 	display: inline-block;
 	position: relative;
@@ -250,7 +256,6 @@ button:hover {
 	height: 40px;
 	background-position: 5px 50%;
 	background-repeat: no-repeat;
-	background-image: url("../svgs/all/drone.svg");
 	background-size: 35px 35px;
 }
 .search-puddles::before {
