@@ -43,9 +43,10 @@ const MapView = Backbone.View.extend({
 	{
 		this.$heatMap.removeClass('selected');
 		if (this.heatMapView) {
-			const heatMapView = this.heatMapView;
-			this.heatMapView = null;
-			setTimeout(()=> heatMapView.remove(), 500);
+			this.heatMapView.remove();
+			// const heatMapView = this.heatMapView;
+			// this.heatMapView = null;
+			// setTimeout(()=> heatMapView.remove(), 500);
 		}
 	},
 	createHeatMap ()

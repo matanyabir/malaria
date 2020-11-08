@@ -93,6 +93,20 @@ const MapModel = Backbone.Model.extend(
 
 		});
 	}
+	,loadMosquitoes (cb)
+	{
+		if (this.get('end')) {
+			return;
+		}
+		this.set('loading', true);
+		Service.getMosquitoes(this.get('id'), (mosquitoes)=> {
+			this.set('loading', false);
+			this.set('mosquitoes', mosquitoes);
+			if (cb) {
+				cb();
+			}
+		});
+	}
 
 	,getCurrPeriod ()
 	{

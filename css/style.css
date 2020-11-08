@@ -431,11 +431,7 @@ button:hover {
 }
 .map.hot-period {
 	background: #b7a51a;
-	/*background: #a58433;*/
 }
-/*.selected {*/
-/*	box-shadow: 0 0 20px rgb(255,255,55), inset 0 0 10px rgba(255,255,55,0.5);*/
-/*}*/
 .map-item {
 	transition: 0.4s ease-in-out transform;
 	cursor: pointer;
@@ -479,4 +475,11 @@ button:hover {
 .puddle[data-state="0"]
 {
 	display: none;
+}
+.mosquito {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	background-color: rgba(200, 0, 0, 0.7);
+	box-shadow: 0 0 5px rgb(200, 0, 0);
 }

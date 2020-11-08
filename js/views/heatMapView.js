@@ -2,29 +2,42 @@ const HeatMapView = Backbone.View.extend({
 	className: 'heat-map',
 	initialize ()
 	{
-		// this.model.on('change:tabView', this.onTabViewChanged, this);
+		this.model.on('change:mosquitoes', this.renderMosquitoes, this);
 		return this;
 	},
 	render: function ()
 	{
-		// this.$normalMap = $('<div class="normal-map-container"></div>');
-		// this.$heatMap = $('<div class="heat-map-container"></div>');
-		// this.$graph = $('<div class="graph-view-container"></div>');
-		// this.$el.append(this.$normalMap)
-		// 	.append(this.$heatMap)
-		// 	.append(this.$graph);
-		// this.renderPeriod();
-		// this.renderMap();
+		const mosquitoes = this.model.get('mosquitoes');
+		if (mosquitoes) {
+			this.renderMosquitoes();
+		} else {
+			this.model.loadMosquitoes();
+		}
+
 		return this;
 	},
-	//
-	// renderHouses: function ()
-	// {
-	// 	this.model.get('houses').each( model => {
-	// 		const view = new HouseView({model});
-	// 		this.$normalMap.append(view.render().$el);
-	// 	});
-	// },
+
+	renderMosquitoes: function ()
+	{
+		this.$el.html('');
+		const mosquitoes = this.model.get('mosquitoes');
+		if (mosquitoes) {
+			mosquitoes.forEach(mos => {
+				const $mos = $('<div class="mosquito"></div>');
+				const left = mos.x;
+				const top = mos.y;
+				$mos.css({left, top});
+				if (mos.c) {
+					const size = (mos.c / 2) + "px";
+					const width = size;
+					const height = size;
+					const borderRadius = size;
+					$mos.css({width, height, borderRadius});
+				}
+				this.$el.append($mos);
+			});
+		}
+	},
 
 
 });
