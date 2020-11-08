@@ -71,7 +71,9 @@ const Service = (function()
 			if (days % 90 === 0) {
 				wet = !wet;
 			}
+			// const kpis = _.clone(_data.kpis);
 			const {kpis} = _data;
+
 			const illRandom = Math.random();
 			if (illRandom>0.9) { // 10% of 1 more ill
 				kpis.ill++;

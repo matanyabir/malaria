@@ -15,6 +15,7 @@ const MapModel = Backbone.Model.extend(
 		cash: 0, // current cash
 		mosquitoes: 0, // array of mosquitoes' positions
 		tabView: TABS_VIEWS.NORMAL_MAP, // the selected view
+		stats: {}, // all kpis until today
 	}
 
 	/**
@@ -46,6 +47,7 @@ const MapModel = Backbone.Model.extend(
 		const costsModel = new KpisModel(costs);
 		this.set({size, time, cash, houses, puddles, kpisModel, costsModel, id});
 		this.updatePuddlesCount();
+		this.addToStats(kpis);
 		return this;
 	}
 
@@ -58,6 +60,7 @@ const MapModel = Backbone.Model.extend(
 		const getMosquitoes = this.get('tabView') === TABS_VIEWS.HEAT_MAP;
 		Service.incDay(this.get('id'), getMosquitoes, ({kpis, mosquitoes})=> {
 			this.set('loading', false);
+			this.addToStats(kpis);
 			this.set('mosquitoes', mosquitoes);
 			const kpisModel = this.get('kpisModel');
 			kpisModel.set(kpis);
@@ -91,6 +94,17 @@ const MapModel = Backbone.Model.extend(
 				cb();
 			}
 
+		});
+	}
+	,addToStats (kpis)
+	{
+		const stats = this.get('stats');
+		_.forEach(kpis, (val, key) => {
+			if (stats[key]) {
+				stats[key].push(val);
+			} else {
+				stats[key] = [val];
+			}
 		});
 	}
 	,loadMosquitoes (cb)
