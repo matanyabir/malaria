@@ -394,6 +394,36 @@ button:hover {
 	background: black;
 	overflow: scroll;
 }
+.heat-map-container
+{
+	transition: 500ms ease-in-out left;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: -100%;
+	width: 100%;
+	background-color: rgba(0,0,0,0.8);
+	box-shadow: 0 0 10px rgba(0,0,0,0.8);
+}
+.heat-map-container.selected
+{
+	left: 0;
+}
+.graph-view-container
+{
+	transition: 500ms ease-in-out left;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 100%;
+	width: 100%;
+	background: #8bbdbc;
+	box-shadow: 0 0 10px rgba(0,0,0,0.8);
+}
+.graph-view-container.selected
+{
+	left: 0;
+}
 .map
 {
 	position: relative;
