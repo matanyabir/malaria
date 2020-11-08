@@ -139,6 +139,25 @@ const MapModel = Backbone.Model.extend(
 			this.set('loading', false);
 		});
 	}
+	,dryPuddle (cost, model)
+	{
+		const cash = this.get('cash') - cost;
+		this.set({cash});
+		// const puddles = this.get('puddles');
+		// puddles.remove(model);
+		this.set('selectedItem', null);
+		model.destroy();
+		// model.trigger('destroy', model, model.collection, {});
+		const kpisModel = this.get('kpisModel');
+		const puddles = kpisModel.get('puddles') - 1;
+		const visiblePuddles = kpisModel.get('visiblePuddles') - 1;
+		kpisModel.set({puddles, visiblePuddles});
+
+		this.set('loading', true);
+		Service.dryPuddles(this.get('id'), [model.get('id')], (kpis)=> {
+			this.set('loading', false);
+		});
+	}
 	,sprayPuddle (cost, model)
 	{
 		const cash = this.get('cash') - cost;

@@ -5,6 +5,7 @@
  */
 const PuddlesCollection = Backbone.Collection.extend(
 {
-	model: PuddleModel
+	model: PuddleModel,
+	url: "needThis"
 
 });

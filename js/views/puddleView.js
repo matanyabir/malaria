@@ -8,6 +8,7 @@ const PuddleView = Backbone.View.extend({
 
 	initialize ()
 	{
+		this.listenTo(this.model, 'destroy', this.remove);
 		this.model.on('change:state', this.renderState, this);
 		this.model.on('change:spray', this.renderSpray, this);
 		this.model.on('change:visible', this.renderVisible, this);

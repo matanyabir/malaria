@@ -77,6 +77,22 @@ const Service = (function()
 	};
 
 	/**
+	 * notify the server that the user dry some puddles
+	 *
+	 * @param {string} mapInstanceId - the id that represents the curr level instance
+	 * @param {array} puddlesIds - array of all the puddles ids that we want to dry
+	 * @param {function} cbSuccess - the callback that should be call in case of success, return object of kpis (if we want to handle eggs count in puddles, etc.)
+	 * @param {function} cbFail - the callback that should be call in case of fail
+	 * @author Matanya
+	 */
+	me.dryPuddles = function(mapInstanceId, puddlesIds, cbSuccess, cbFail)
+	{
+		setTimeout(function(){
+			cbSuccess({});
+		}, Math.random()*100);
+	};
+
+	/**
 	 * notify the server that the user sprayed some puddles
 	 *
 	 * @param {string} mapInstanceId - the id that represents the curr level instance

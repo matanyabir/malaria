@@ -165,6 +165,12 @@ button:hover {
 .kpi-img.ill-mos {
 	background-image: url("../svgs/all/red-mosquito.svg");
 }
+.kpi-img.id {
+	background-image: url("../svgs/all/dog-tag.svg");
+}
+.kpi-img.sprayed {
+	background-image: url("../svgs/all/black-spray.svg");
+}
 .kpi-txt {
 	display: block;
 	line-height: 30px;
@@ -188,9 +194,10 @@ button:hover {
 	transition: 0.5s ease-in-out left;
 	/*border: 1px #1b038a solid;*/
 	box-shadow: 0 0 10px #1b038a;
-	top: 0px;
-	/*bottom: 0;*/
-	height: 350px;
+	top: 0;
+	bottom: 0;
+	z-index: 1;
+	/*height: 350px;*/
 	left: -220px;
 	width: 200px;
 	background: #84e6e3;
@@ -233,10 +240,11 @@ button:hover {
 }
 .selected-title {
 	font-size: 18px;
+	padding-bottom: 10px;
 }
-.selected-sub-title {
-	font-size: 15px;
-}
+/*.selected-sub-title {*/
+/*	font-size: 15px;*/
+/*}*/
 .selected-house .pud-container {
 	display: none;
 }
@@ -281,6 +289,16 @@ button:hover {
 	width: 40px;
 	height: 40px;
 	background-image: url("../svgs/all/spray-bottle.svg");
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-size: 35px 35px;
+}
+.dry-puddle {
+	display: inline-block;
+	position: relative;
+	width: 40px;
+	height: 40px;
+	background-image: url("../svgs/all/hoe.svg");
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
 	background-size: 35px 35px;

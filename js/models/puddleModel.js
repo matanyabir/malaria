@@ -16,7 +16,13 @@ const PuddleModel = Backbone.Model.extend(
 		,visible: false
 		,isSatellite: false // can be found with satellite
 	},
-
+	destroy: function (options) {
+		// don't make a server call, just delete from collection and call success
+		this.trigger('destroy', this, this.collection, options);
+		if (options && options.success) {
+			options.success();
+		}
+	},
 	initialize ()
 	{
 		this.on('change:periodIndex', this.onPeriodChange, this);
