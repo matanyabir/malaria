@@ -3,36 +3,39 @@ const GraphMapView = Backbone.View.extend({
 	initialize ()
 	{
 		this.model.on('change:day', this.onDayChange, this);
-		this.$canvas = $('<canvas height="250" width="500"></canvas>');
-		this.$el.html(this.$canvas);
+		this.model.on('change:showLastYear', this.onShowLastYearChange, this);
+		this.$canvasContainer = $('<div class="canvas-container"></div>');
+		if (this.model.get('lastYear')) {
+			this.$lastYearBtn = $('<button class="last-year" height="250" width="500"></button>');
+			this.$el.html(this.$lastYearBtn);
+
+		}
+		this.$el.append(this.$canvasContainer);
 		return this;
 	},
-	// events: {
-	// 	"click": "onClick",
-	// },
+
+	events: {
+		"click .last-year": "onClickLastYear",
+	}
+	,
 	render: function ()
 	{
 		const stats = this.model.get('stats');
-		const data = stats.mosquitoes;
+		const showLastYear = this.model.get('showLastYear');
+		const lastYear = this.model.get('lastYear');
 		let time = new Date(this.model.get('time').start).getTime();
-		// only until today:
-		// const labels = data.map((x, i) => {
-		// 	const date = new Date(time + i * 24 * 60 * 60 * 1000);
-		// 	const dateStr = `${date.getDate()}.${1+date.getMonth()}`;
-		// 	return dateStr
-		// });
-		let max = 0;
-		const labels = [];
-		const {periods} = this.model.get('time');
-		periods.forEach(p => max += p.duration);
-		let i = 0;
-		while ( i<= max ) {
+		let arr;
+		// we assume that we have all kpis, so we choose arbitrary the "ill" just for the count...
+		if (showLastYear) {
+			arr = lastYear.ill;
+		} else {
+			arr = stats.ill;
+		}
+		const labels = arr.map((x, i) => {
 			const date = new Date(time + i * 24 * 60 * 60 * 1000);
 			const dateStr = `${date.getDate()}.${1+date.getMonth()}`;
-			labels.push(dateStr);
-			i++;
-		}
-
+			return dateStr
+		});
 		const lineChartData = {
 			type: "line",
 			data: {
@@ -65,8 +68,7 @@ const GraphMapView = Backbone.View.extend({
 				]
 			}
 		};
-		const lastYear = this.model.get('lastYear');
-		if (true && lastYear) {
+		if (showLastYear) {
 			lineChartData.data.datasets.push(
 				{
 					label: "Last year mosquitoes",
@@ -95,21 +97,39 @@ const GraphMapView = Backbone.View.extend({
 				}
 			);
 		}
-		const ctx = this.$canvas[0].getContext("2d");
+		const $canvas = $('<canvas class="graphs-canvas" height="250" width="500"></canvas>');
+		this.$canvasContainer.html($canvas);
+
+		const ctx = $canvas[0].getContext("2d");
 		this.myChart = new Chart(ctx, lineChartData, {responsive: false});
 		return this;
 	},
 	onDayChange: function ()
 	{
-		// console.log("day = " + this.model.get('day'));
-		// const stats = this.model.get('stats');
-		// console.log("illMosquitoes = " + stats.illMosquitoes);
-		// console.log("ill = " + stats.ill);
-		// console.log("data.length = " + data.length);
-		// this.myChart.data.datasets.forEach((dataset) => {
-		// 	dataset.data.push(data[data.length - 1]);
-		// });
+		if (!this.model.get('showLastYear')) {
+			const time = new Date(this.model.get('time').start).getTime();
+			const day = this.model.get('day');
+			const date = new Date(time + day * 24 * 60 * 60 * 1000);
+			const label = `${date.getDate()}.${1+date.getMonth()}`;
+
+			// we need to add "today" label:
+			this.myChart.data.labels.push(label);
+		}
 		this.myChart.update();
+	},
+	onClickLastYear: function ()
+	{
+		this.model.set('showLastYear', !this.model.get('showLastYear'));
+	},
+	onShowLastYearChange: function ()
+	{
+		if (this.model.get('showLastYear')) {
+			this.$lastYearBtn.addClass('selected');
+		} else {
+			this.$lastYearBtn.removeClass('selected');
+		}
+		// this.myChart.clear();
+		this.render();
 	},
 
 });
