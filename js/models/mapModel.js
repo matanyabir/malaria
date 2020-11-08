@@ -24,7 +24,7 @@ const MapModel = Backbone.Model.extend(
 	*/
 	,buildFromJson (data)
 	{
-		const {size, time, cash, kpis, costs, id} = data;
+		const {size, time, cash, kpis, costs, id, lastYear} = data;
 		const houses = new HousesCollection;
 		const puddles = new PuddlesCollection;
 		if (data.houses) {
@@ -45,7 +45,7 @@ const MapModel = Backbone.Model.extend(
 		}
 		const kpisModel = new KpisModel(kpis);
 		const costsModel = new KpisModel(costs);
-		this.set({size, time, cash, houses, puddles, kpisModel, costsModel, id});
+		this.set({size, time, cash, houses, puddles, kpisModel, costsModel, id, lastYear});
 		this.updatePuddlesCount();
 		this.addToStats(kpis);
 		return this;

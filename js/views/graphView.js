@@ -49,6 +49,18 @@ const GraphMapView = Backbone.View.extend({
 				]
 			}
 		};
+		const lastYear = this.model.get('lastYear');
+		if (lastYear) {
+			lineChartData.data.datasets.push(					{
+					label: "Last year mosquitoes counter",
+					backgroundColor: "rgba(250,148,143,0.15)",
+					hoverBackgroundColor: "rgba(250,141,112,0.2)",
+					borderColor: "rgb(250,132,198)",
+					hoverBorderColor: "rgb(250,65,172)",
+					data: lastYear.mosquitoes
+				}
+			);
+		}
 		const ctx = this.$canvas[0].getContext("2d");
 		this.myChart = new Chart(ctx, lineChartData, {responsive: false});
 		return this;
@@ -58,6 +70,7 @@ const GraphMapView = Backbone.View.extend({
 		// console.log("day = " + this.model.get('day'));
 		// const stats = this.model.get('stats');
 		// const data = stats.mosquitoes;
+		// console.log("data = " + data);
 		// console.log("data.length = " + data.length);
 		// this.myChart.data.datasets.forEach((dataset) => {
 		// 	dataset.data.push(data[data.length - 1]);
