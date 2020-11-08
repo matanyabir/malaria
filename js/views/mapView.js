@@ -1,5 +1,5 @@
 const MapView = Backbone.View.extend({
-	className: 'map',
+	className: 'main-view',
 	initialize ()
 	{
 		this.model.on('change:periodIndex', this.renderPeriod, this);
@@ -7,15 +7,19 @@ const MapView = Backbone.View.extend({
 		return this;
 	},
 	events: {
-		"click": "onClick",
+		"click .map-container": "onClick",
 	},
 	render: function ()
 	{
-		this.$normalMap = $('<div class="normal-map-container"></div>');
+		this.$mapContainer = $('<div class="map-container"></div>');
+		this.$bigMap = $('<div class="big-map"></div>');
 		this.$heatMap = $('<div class="heat-map-container"></div>');
+		this.$mapItems = $('<div class="map-items-container"></div>');
 		this.$graph = $('<div class="graph-view-container"></div>');
-		this.$el.append(this.$normalMap)
-			.append(this.$heatMap)
+		this.$mapContainer.append(this.$bigMap);
+		this.$bigMap.append(this.$mapItems)
+			.append(this.$heatMap);
+		this.$el.append(this.$mapContainer)
 			.append(this.$graph);
 		this.renderPeriod();
 		this.renderMap();
@@ -81,9 +85,9 @@ const MapView = Backbone.View.extend({
 			return;
 		}
 		if (period.type === PERIOD_TYPE.HOT) {
-			this.$el.addClass('hot-period');
+			this.$bigMap.addClass('hot-period');
 		} else {
-			this.$el.removeClass('hot-period');
+			this.$bigMap.removeClass('hot-period');
 		}
 	},
 
@@ -91,7 +95,7 @@ const MapView = Backbone.View.extend({
 	{
 		this.model.get('houses').each( model => {
 			const view = new HouseView({model});
-			this.$normalMap.append(view.render().$el);
+			this.$mapItems.append(view.render().$el);
 		});
 	},
 
@@ -99,14 +103,14 @@ const MapView = Backbone.View.extend({
 	{
 		this.model.get('puddles').each( model => {
 			const view = new PuddleView({model});
-			this.$normalMap.append(view.render().$el);
+			this.$mapItems.append(view.render().$el);
 		});
 	},
 
 	renderMap: function ()
 	{
 		const {width, height} = this.model.get('size');
-		this.$normalMap.css({width, height});
+		this.$bigMap.css({width, height});
 	},
 	onClick ()
 	{

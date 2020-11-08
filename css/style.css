@@ -382,8 +382,8 @@ button:hover {
 	pointer-events: none;
 	opacity: 0.3;
 }
-/* ---- map-container ---- */
-#map-container
+/* ---- main-view-container ---- */
+#main-view-container
 {
 	position: absolute;
 	border: 1px #1b038a solid;
@@ -392,11 +392,13 @@ button:hover {
 	left: 200px;
 	right: 0px;
 	background: black;
-	overflow: scroll;
+	/*overflow: scroll;*/
+	overflow: hidden;
 }
 .heat-map-container
 {
 	transition: 500ms ease-in-out left;
+	/*overflow: hidden;*/
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -424,12 +426,33 @@ button:hover {
 {
 	left: 0;
 }
-.map
+.main-view
+{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background: black;
+	/*overflow: scroll;*/
+	overflow: hidden;
+}
+.map-container
+{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background: black;
+	overflow: scroll;
+}
+.big-map
 {
 	position: relative;
 	background: #3b8025;
 }
-.map.hot-period {
+.big-map.hot-period {
 	background: #b7a51a;
 }
 .map-item {

@@ -18,7 +18,7 @@ const LevelView = Backbone.View.extend({
 	renderLevelMap ()
 	{
 		this.$topPanel = $('<div id="top-panel" class="container1"></div>');
-		this.$map = $('<div id="map-container" class="container1"></div>');
+		this.$map = $('<div id="main-view-container" class="container2"></div>');
 		this.$sideBar = $('<div id="side-bar" class="container1"></div>');
 		this.$el.html(this.$topPanel).append(this.$map).append(this.$sideBar);
 
