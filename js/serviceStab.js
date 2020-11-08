@@ -21,22 +21,57 @@ const Service = (function()
 	};
 	let wet = true;
 	let days = 0;
+
+	const _getMosquitoes = function () {
+		const {kpis, size} = _data;
+		const mosquitoes = [];
+		let i = 0;
+		while (i < kpis.mosquitoes) {
+			const m = {
+				x: Math.floor(Math.random() * size.width),
+				y: Math.floor(Math.random() * size.height),
+			};
+			if (Math.random() > 0.9) {
+				m.c = Math.ceil(1 + Math.random()*20);
+				i += m.c;
+			} else {
+				i++;
+			}
+			mosquitoes.push(m);
+		}
+		return mosquitoes;
+	};
 	/**
 	 * set the data to the service
 	 *
 	 * @param {string} mapInstanceId - the id that represents the curr level instance
-	 * @param {function} cbSuccess - the callback that should be call in case of success, return object of kpis
+	 * @param {function} cbSuccess - the callback that should be call in case of success, return array of mosquitoes
 	 * @param {function} cbFail - the callback that should be call in case of fail
 	 * @author Matanya
 	 */
-	me.incDay = function(mapInstanceId, cbSuccess, cbFail)
+	me.getMosquitoes = function(mapInstanceId, cbSuccess, cbFail)
+	{
+		setTimeout(function(){
+			cbSuccess(_getMosquitoes());
+		}, 50 + Math.random()*100);
+	};
+	/**
+	 * set the data to the service
+	 *
+	 * @param {string} mapInstanceId - the id that represents the curr level instance
+	 * @param {boolean} getMosquitoes - do we want to get the mosquitoes in the cbSuccess?
+	 * @param {function} cbSuccess - the callback that should be call in case of success, return object of kpis, mosquitoes
+	 * @param {function} cbFail - the callback that should be call in case of fail
+	 * @author Matanya
+	 */
+	me.incDay = function(mapInstanceId, getMosquitoes, cbSuccess, cbFail)
 	{
 		setTimeout(function(){
 			days++;
 			if (days % 90 === 0) {
 				wet = !wet;
 			}
-			const kpis = _data.kpis;
+			const {kpis} = _data;
 			const illRandom = Math.random();
 			if (illRandom>0.9) { // 10% of 1 more ill
 				kpis.ill++;
@@ -56,7 +91,11 @@ const Service = (function()
 				kpis.mosquitoes = Math.floor(kpis.mosquitoes * (1 - Math.random() / 50));
 				kpis.illMosquitoes = Math.floor(kpis.illMosquitoes * (1 - Math.random() / 50));
 			}
-			cbSuccess(kpis);
+			let mosquitoes = null;
+			if (getMosquitoes) {
+				mosquitoes = _getMosquitoes();
+			}
+			cbSuccess({kpis, mosquitoes});
 		}, 50 + Math.random()*100);
 	};
 

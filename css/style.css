@@ -26,9 +26,10 @@ button:hover {
 	position: absolute;
 	right: 10px;
 	top: 10px;
-	font-size: 52px;
-	line-height: 52px;
+	font-size: 36px;
+	line-height: 36px;
 	color: #1b038a;
+	letter-spacing: 2px;
 	text-shadow: 4px 4px #6556ad;
 }
 .cal {
@@ -115,6 +116,47 @@ button:hover {
 	background-repeat: no-repeat;
 	background-image: url("../svgs/all/calendar.svg");
 }
+
+.tabs-view {
+	font-size: 0;
+	overflow: hidden;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	border: 1px #1b038a solid;
+	border-radius: 6px;
+}
+.tabs-view>* {
+	display: inline-block;
+	cursor: pointer;
+	background-color: #e2e2e2;
+	width: 35px;
+	height: 35px;
+	background-size: 25px 25px;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+}
+.tabs-view>*:not(:first-child) {
+	border-left: 1px #1b038a solid;
+}
+.tabs-view>*:hover{
+	background-color: #fff;
+}
+.tabs-view>*.selected{
+	pointer-events: none;
+	box-shadow: inset #1b038a 0px 0px 10px;
+	background-color: #fff;
+}
+.heat-map {
+	background-image: url("../svgs/all/radar.svg");
+}
+.normal-map {
+	background-image: url("../svgs/all/planet-earth.svg");
+}
+.graph-view {
+	background-image: url("../svgs/all/statistics.svg");
+}
+
 /* ---- side-bar ---- */
 #side-bar
 {
@@ -242,9 +284,6 @@ button:hover {
 	font-size: 18px;
 	padding-bottom: 10px;
 }
-/*.selected-sub-title {*/
-/*	font-size: 15px;*/
-/*}*/
 .selected-house .pud-container {
 	display: none;
 }
@@ -339,7 +378,7 @@ button:hover {
 .action.disabled .cost {
 	color: #b80000;
 }
-.disabled button, .loading button:not(.enable-during-loading){
+.disabled button, .loading button:not(.enable-during-loading), .loading .disable-on-loading{
 	pointer-events: none;
 	opacity: 0.3;
 }

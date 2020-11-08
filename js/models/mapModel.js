@@ -13,6 +13,8 @@ const MapModel = Backbone.Model.extend(
 		day: 0, // current day
 		periodIndex: 0, // current index of period in time.periods array
 		cash: 0, // current cash
+		mosquitoes: 0, // array of mosquitoes' positions
+		tabView: TABS_VIEWS.NORMAL_MAP, // the selected view
 	}
 
 	/**
@@ -47,22 +49,16 @@ const MapModel = Backbone.Model.extend(
 		return this;
 	}
 
-	// /**
-	//  * get curr state JSON
-	// */
-	// ,getJson ()
-	// {
-	// 	return {tbd};
-	// }
-
 	,incDay (cb)
 	{
 		if (this.get('end')) {
 			return;
 		}
 		this.set('loading', true);
-		Service.incDay(this.get('id'), (kpis)=> {
+		const getMosquitoes = this.get('tabView') === TABS_VIEWS.HEAT_MAP;
+		Service.incDay(this.get('id'), getMosquitoes, ({kpis, mosquitoes})=> {
 			this.set('loading', false);
+			this.set('mosquitoes', mosquitoes);
 			const kpisModel = this.get('kpisModel');
 			kpisModel.set(kpis);
 			this.updateSelectedKpis();

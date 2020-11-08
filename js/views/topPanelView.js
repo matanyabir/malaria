@@ -28,6 +28,7 @@ const TopPanelView = Backbone.View.extend(
 		$cal.append(this.$day);
 		$cal.css({width: days + "px"});
 
+		const tabsView = new TabsView({model: this.model});
 		this.$mainStatus = $('<div class="main-status"></div>');
 		this.$playPauseButton = $('<button class="play-pause enable-during-loading"></button>');
 		this.$nextDayButton = $('<button class="next-day"></button>');
@@ -37,6 +38,7 @@ const TopPanelView = Backbone.View.extend(
 			.append(this.$playPauseButton)
 			.append(this.$nextDayButton)
 			.append(this.$nextMonthButton)
+			.append(tabsView.render().$el)
 			.append('<div class="logo">DETECT</div>');
 		this.model.on('change:day', this.renderDay, this);
 		this.model.on('change:loading', this.onLoadingChange, this);
