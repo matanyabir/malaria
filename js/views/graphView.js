@@ -55,11 +55,13 @@ const GraphMapView = Backbone.View.extend({
 	},
 	onDayChange: function ()
 	{
-		const stats = this.model.get('stats');
-		const data = stats.mosquitoes;
-		this.myChart.data.datasets.forEach((dataset) => {
-			dataset.data.push(data[data.length - 1]);
-		});
+		// console.log("day = " + this.model.get('day'));
+		// const stats = this.model.get('stats');
+		// const data = stats.mosquitoes;
+		// console.log("data.length = " + data.length);
+		// this.myChart.data.datasets.forEach((dataset) => {
+		// 	dataset.data.push(data[data.length - 1]);
+		// });
 		this.myChart.update();
 	},
 
