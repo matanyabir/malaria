@@ -66,6 +66,9 @@ const GraphMapView = Backbone.View.extend({
 						data: stats.ill
 					},
 				]
+			},
+			options: {
+				responsive: false,
 			}
 		};
 		if (showLastYear) {
@@ -100,11 +103,11 @@ const GraphMapView = Backbone.View.extend({
 				}
 			);
 		}
-		const $canvas = $('<canvas class="graphs-canvas" height="250" width="500"></canvas>');
+		const $canvas = $('<canvas class="graphs-canvas" height="500" width="1000"></canvas>');
 		this.$canvasContainer.html($canvas);
 
 		const ctx = $canvas[0].getContext("2d");
-		this.myChart = new Chart(ctx, lineChartData, {responsive: false});
+		this.myChart = new Chart(ctx, lineChartData, {});
 		return this;
 	},
 	onDayChange: function ()

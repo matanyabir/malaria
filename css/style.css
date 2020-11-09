@@ -509,7 +509,9 @@ button:hover {
 
 /* graph */
 .graphs-canvas {
-	/*max-height: 400px;*/
+	margin: auto;
+	/*max-height: 600px;*/
+	/*width: 100%;*/
 }
 .last-year {
 	margin: 10px;
