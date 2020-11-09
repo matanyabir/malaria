@@ -78,6 +78,12 @@ const TopPanelView = Backbone.View.extend(
 		let text;
 		if (this.model.get('end')) {
 			text = "TBD. Level end.";
+			const kpisModel = this.model.get('kpisModel');
+			const mosquitoes = kpisModel.get('mosquitoes');
+			const illMosquitoes = kpisModel.get('illMosquitoes');
+			const ill = kpisModel.get('ill');
+			let congratsMsg = `Congrats! You finished the level! #Mosquitoes =${mosquitoes} #InfectiousMosquitoes =${illMosquitoes} #Ill People =${ill} `;
+			alert(congratsMsg);
 		} else	if (this.model.get('loading')) {
 			text = "Calculating simulation...";
 		} else {

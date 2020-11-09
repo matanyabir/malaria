@@ -50,7 +50,7 @@ const GraphMapView = Backbone.View.extend({
 						data: stats.mosquitoes
 					},
 					{
-						label: "Ill mosquitoes",
+						label: "Infectious Mosquitoes",
 						fill: false,
 						pointHoverRadius: 10,
 						borderColor: "rgb(150,43,139)",
@@ -58,7 +58,7 @@ const GraphMapView = Backbone.View.extend({
 						data: stats.illMosquitoes
 					},
 					{
-						label: "Ill people",
+						label: "Ill People",
 						fill: false,
 						pointHoverRadius: 10,
 						borderColor: "rgb(33,150,55)",
@@ -74,7 +74,7 @@ const GraphMapView = Backbone.View.extend({
 		if (showLastYear) {
 			lineChartData.data.datasets.push(
 				{
-					label: "Last year mosquitoes",
+					label: "Last Year Mosquitoes",
 					fill: false,
 					pointHoverRadius: 10,
 					borderColor: "rgb(105,156,250)",
@@ -84,7 +84,7 @@ const GraphMapView = Backbone.View.extend({
 			);
 			lineChartData.data.datasets.push(
 				{
-					label: "Last year ill mosquitoes",
+					label: "Last Year Infectious Mosquitoes",
 					fill: false,
 					pointHoverRadius: 10,
 					borderColor: "rgb(250,91,208)",
@@ -94,7 +94,7 @@ const GraphMapView = Backbone.View.extend({
 			);
 			lineChartData.data.datasets.push(
 				{
-					label: "Last year ill people",
+					label: "Last year Ill People",
 					fill: false,
 					pointHoverRadius: 10,
 					borderColor: "rgb(62,212,95)",
