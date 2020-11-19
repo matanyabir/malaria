@@ -42,7 +42,7 @@ const Service = (function()
 		return mosquitoes;
 	};
 	/**
-	 * set the data to the service
+	 * get the mosquitoes to map instance
 	 *
 	 * @param {string} mapInstanceId - the id that represents the curr level instance
 	 * @param {function} cbSuccess - the callback that should be call in case of success, return array of mosquitoes
@@ -56,7 +56,7 @@ const Service = (function()
 		}, 50 + Math.random()*100);
 	};
 	/**
-	 * set the data to the service
+	 * tell the server to inc the day of map instance, and get back results
 	 *
 	 * @param {string} mapInstanceId - the id that represents the curr level instance
 	 * @param {boolean} getMosquitoes - do we want to get the mosquitoes in the cbSuccess?
