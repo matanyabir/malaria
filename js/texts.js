@@ -17,5 +17,26 @@ const TEXTS = {
 			sprayPud: "Spray all the visible puddles in the map",
 			sprayHos: "Spray all the houses in the map",
 		},
+	},
+	selectedPanel: {
+		kpis: {
+			id: "The ID of the element.",
+			sprayed: "Is this element sprayed? And how long the spray will be effective?",
+			egg: "The amount of eggs in this puddle.",
+			pup: "The amount of pupae in this puddle.",
+			lar: "The amount of lavrae in this puddle."
+		},
+		actions: {
+			sprayPud: "Spray this puddle. This will be effective for 7 days.",
+			sprayHos: "Spray this house. This will be effective for 120 days.",
+			dryPud: "Destroy this puddle."
+		},
+	},
+	terms: {
+		seasonalPuddle: 'Seasonal Puddle',
+		permanentPuddle: 'Permanent Puddle',
+		house: 'House',
+		daysLeft: 'Days left',
+		notSprayed: 'Not sprayed',
 	}
 };

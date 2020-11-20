@@ -217,7 +217,7 @@ const Service = (function()
 			ill: 10, // current amount of ill humans
 			mosquitoes: 2000, // current amount of mosquitoes
 			illMosquitoes: 230, // current amount of ill mosquitoes
-			puddlesMap: { // map of count of eggs, lavraes, popaes per puddle id
+			puddlesMap: { // map of count of eggs, lavrae, pupae per puddle id
 				p0: {
 					e: 17,
 					l: 13,
