@@ -106,6 +106,9 @@ const MapModel = Backbone.Model.extend(
 				stats[key] = [val];
 			}
 		});
+		// console.log('stats.mosquitoes', JSON.stringify(stats.mosquitoes));
+		// console.log('stats.illMosquitoes', JSON.stringify(stats.illMosquitoes));
+		// console.log('stats.ill', JSON.stringify(stats.ill));
 	}
 	,loadMosquitoes (cb)
 	{
