@@ -53,23 +53,24 @@ const SideBarView = Backbone.View.extend(
 		this.$ill = $('<span class="kpi-txt"></span>');
 		this.$mos = $('<span class="kpi-txt"></span>');
 		this.$illMos = $('<span class="kpi-txt"></span>');
-		this.$data.append('<span class="kpi-img cash"></span>').append(this.$cash)
-			.append('<span class="kpi-img pud"></span>').append(this.$pud)
-			.append('<span class="kpi-img hos"></span>').append(this.$hos)
-			.append('<span class="kpi-img pop"></span>').append(this.$pop)
-			.append('<span class="kpi-img ill"></span>').append(this.$ill)
-			.append('<span class="kpi-img mos"></span>').append(this.$mos)
-			.append('<span class="kpi-img ill-mos"></span>').append(this.$illMos);
-		this.$actions = $('<div class="actions-container container"></div>');
-		this.$searchInButton = $('<div class="action"><button class="search-puddles search-drone search-in"></button><span class="cost">' + Utils.numTxt(this.searchInCost())+'$</span></div>');
-		this.$searchOutButton = $('<div class="action"><button class="search-puddles search-drone search-out"></button><span class="cost">' + Utils.numTxt(this.searchOutCost())+'$</span></div>');
-		this.$searchInSatelliteButton = $('<div class="action"><button class="search-puddles search-satellite search-in"></button><span class="cost">' + Utils.numTxt(this.searchInSatelliteCost())+'$</span></div>');
-		this.$searchOutSatelliteButton = $('<div class="action"><button class="search-puddles search-satellite search-out"></button><span class="cost">' + Utils.numTxt(this.searchOutSatelliteCost())+'$</span></div>');
-		this.$sprayPuddleCost = $('<span class="cost"></span>');
-		this.$sprayPuddleButton = $('<div class="action"><button class="spray s-puddle"></button></div>');
+		this.$data
+			.append(`<span class="kpi-img cash hint--top-right" aria-label="${TEXTS.sidePanel.kpis.cash}"></span>`).append(this.$cash)
+			.append(`<span class="kpi-img pud hint--top-right" aria-label="${TEXTS.sidePanel.kpis.pud}"></span>`).append(this.$pud)
+			.append(`<span class="kpi-img hos hint--top-right" aria-label="${TEXTS.sidePanel.kpis.hos}"></span>`).append(this.$hos)
+			.append(`<span class="kpi-img pop hint--top-right" aria-label="${TEXTS.sidePanel.kpis.pop}"></span>`).append(this.$pop)
+			.append(`<span class="kpi-img ill hint--top-right" aria-label="${TEXTS.sidePanel.kpis.ill}"></span>`).append(this.$ill)
+			.append(`<span class="kpi-img mos hint--top-right" aria-label="${TEXTS.sidePanel.kpis.mos}"></span>`).append(this.$mos)
+			.append(`<span class="kpi-img ill-mos hint--top-right" aria-label="${TEXTS.sidePanel.kpis.illMos}"></span>`).append(this.$illMos);
+		this.$actions = $(`<div class="actions-container container"></div>`);
+		this.$searchInButton = $(`<div class="action hint--top-right" aria-label="${TEXTS.sidePanel.actions.srcInDrone}"><button class="search-puddles search-drone search-in"></button><span class="cost">${Utils.numTxt(this.searchInCost())}$</span></div>`);
+		this.$searchOutButton = $(`<div class="action hint--top-right" aria-label="${TEXTS.sidePanel.actions.srcOutDrone}"><button class="search-puddles search-drone search-out"></button><span class="cost">${Utils.numTxt(this.searchOutCost())}$</span></div>`);
+		this.$searchInSatelliteButton = $(`<div class="action hint--top-right hint--large" aria-label="${TEXTS.sidePanel.actions.srcInSat}"><button class="search-puddles search-satellite search-in"></button><span class="cost">${Utils.numTxt(this.searchInSatelliteCost())}$</span></div>`);
+		this.$searchOutSatelliteButton = $(`<div class="action hint--top-right hint--large" aria-label="${TEXTS.sidePanel.actions.srcOutSat}"><button class="search-puddles search-satellite search-out"></button><span class="cost">${Utils.numTxt(this.searchOutSatelliteCost())}$</span></div>`);
+		this.$sprayPuddleCost = $(`<span class="cost"></span>`);
+		this.$sprayPuddleButton = $(`<div class="action hint--top-right" aria-label="${TEXTS.sidePanel.actions.sprayPud}"><button class="spray s-puddle"></button></div>`);
 		this.$sprayPuddleButton.append(this.$sprayPuddleCost);
-		this.$sprayHouseCost = $('<span class="cost"></span>');
-		this.$sprayHouseButton = $('<div class="action"><button class="spray s-house"></button></div>');
+		this.$sprayHouseCost = $(`<span class="cost"></span>`);
+		this.$sprayHouseButton = $(`<div class="action hint--top-right" aria-label="${TEXTS.sidePanel.actions.sprayHos}"><button class="spray s-house"></button></div>`);
 		this.$sprayHouseButton.append(this.$sprayHouseCost);
 		this.$actions.append(this.$searchInButton)
 			.append(this.$searchOutButton)
