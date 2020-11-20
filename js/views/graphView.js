@@ -33,8 +33,7 @@ const GraphMapView = Backbone.View.extend({
 		}
 		const labels = arr.map((x, i) => {
 			const date = new Date(time + i * 24 * 60 * 60 * 1000);
-			const dateStr = `${date.getDate()}.${1+date.getMonth()}`;
-			return dateStr
+			return Utils.getDateStr(date);
 		});
 		const lineChartData = {
 			type: "line",
@@ -139,7 +138,7 @@ const GraphMapView = Backbone.View.extend({
 			const time = new Date(this.model.get('time').start).getTime();
 			const day = this.model.get('day');
 			const date = new Date(time + day * 24 * 60 * 60 * 1000);
-			const label = `${date.getDate()}.${1+date.getMonth()}`;
+			const label = Utils.getDateStr(date);
 
 			// we need to add "today" label:
 			this.myChart.data.labels.push(label);

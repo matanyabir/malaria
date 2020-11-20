@@ -70,7 +70,7 @@ const TopPanelView = Backbone.View.extend(
 		let time = new Date(this.model.get('time').start).getTime();
 		time += day * 24 * 60 * 60 * 1000;
 		const date = new Date(time);
-		const dateStr = `${date.getDate()}.${1+date.getMonth()}`;
+		const dateStr = Utils.getDateStr(date);
 		this.$day.html(dateStr).css({left: day + 'px'});
 	},
 	renderStatus ()

@@ -17,5 +17,17 @@ const Utils = (function()
 		return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	};
 
+	/**
+	 * create display string fot date, e.g.: "27/3"
+	 *
+	 * @param {Date} date - the date
+	 * @return {string} strDate - the display date
+	 * @author Matanya
+	 */
+	me.getDateStr = function(date)
+	{
+		return `${date.getDate()}/${1+date.getMonth()}`;
+	};
+
 	return me;
 })();
