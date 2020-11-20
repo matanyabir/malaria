@@ -1,7 +1,7 @@
 // type for period
 const PERIOD_TYPE = {
-	HOT: 0
-	,COLD: 1
+	DRY: 0
+	,WET: 1
 };
 
 // location type for puddles

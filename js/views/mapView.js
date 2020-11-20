@@ -84,10 +84,10 @@ const MapView = Backbone.View.extend({
 			this.$el.html('TBD. Level ended.');
 			return;
 		}
-		if (period.type === PERIOD_TYPE.HOT) {
-			this.$bigMap.addClass('hot-period');
+		if (period.type === PERIOD_TYPE.DRY) {
+			this.$bigMap.addClass('dry-period');
 		} else {
-			this.$bigMap.removeClass('hot-period');
+			this.$bigMap.removeClass('dry-period');
 		}
 	},
 

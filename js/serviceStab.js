@@ -380,19 +380,19 @@ const Service = (function()
 			start: "1/1/2020", // note: the year isn't important...
 			periods:[
 				{
-					type: PERIOD_TYPE.COLD,
+					type: PERIOD_TYPE.WET,
 					duration: 90 // duration in days
 				},
 				{
-					type: PERIOD_TYPE.HOT,
+					type: PERIOD_TYPE.DRY,
 					duration: 90 // duration in days
 				},
 				{
-					type: PERIOD_TYPE.COLD,
+					type: PERIOD_TYPE.WET,
 					duration: 90 // duration in days
 				},
 				{
-					type: PERIOD_TYPE.HOT,
+					type: PERIOD_TYPE.DRY,
 					duration: 90 // duration in days
 				}
 			]

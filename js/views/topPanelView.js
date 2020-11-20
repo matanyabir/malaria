@@ -10,36 +10,36 @@ const TopPanelView = Backbone.View.extend(
 
 	initialize ()
 	{
-		const $cal = $('<div class="cal"></div>');
+		const $cal = $(`<div class="cal"></div>`);
 		let days = 0;
-		const {periods} = this.model.get('time');
+		const {periods} = this.model.get(`time`);
 		periods.forEach((p) => {
-			const $period = $('<div class="period"></div>');
-			const left = days + 'px';
-			const width = p.duration + 'px';
+			const $period = $(`<div class="period"></div>`);
+			const left = days + `px`;
+			const width = p.duration + `px`;
 			$period.css({left, width});
 			days += p.duration;
-			if (p.type === PERIOD_TYPE.HOT) {
-				$period.addClass('hot-period');
+			if (p.type === PERIOD_TYPE.DRY) {
+				$period.addClass(`dry-period`);
 			}
 			$cal.append($period);
 		});
-		this.$day = $('<span class="day"></span>');
+		this.$day = $(`<span class="day"></span>`);
 		$cal.append(this.$day);
 		$cal.css({width: days + "px"});
 
 		const tabsView = new TabsView({model: this.model});
-		this.$mainStatus = $('<div class="main-status"></div>');
-		this.$playPauseButton = $('<button class="play-pause enable-during-loading"></button>');
-		this.$nextDayButton = $('<button class="next-day"></button>');
-		this.$nextMonthButton = $('<button class="next-month"></button>');
+		this.$mainStatus = $(`<div class="main-status"></div>`);
+		this.$playPauseButton = $(`<button class="play-pause enable-during-loading hint--bottom-right" aria-label="${TEXTS.topPanel.play}"></button>`);
+		this.$nextDayButton = $(`<button class="next-day hint--bottom-right" aria-label="${TEXTS.topPanel.incDay}"></button>`);
+		this.$nextMonthButton = $(`<button class="next-month hint--bottom-right" aria-label="${TEXTS.topPanel.incMonth}""></button>`);
 		this.$el.html($cal)
 			.append(this.$mainStatus)
 			.append(this.$playPauseButton)
 			.append(this.$nextDayButton)
 			.append(this.$nextMonthButton)
 			.append(tabsView.render().$el)
-			.append('<div class="logo">DETECT</div>');
+			.append(`<div class="logo">DETECT</div>`);
 		this.model.on('change:day', this.renderDay, this);
 		this.model.on('change:loading', this.onLoadingChange, this);
 		this.model.on('change:end', this.renderStatus, this);
@@ -84,10 +84,10 @@ const TopPanelView = Backbone.View.extend(
 			const ill = kpisModel.get('ill');
 			let congratsMsg = `Congrats! You finished the level! #Mosquitoes =${mosquitoes} #InfectiousMosquitoes =${illMosquitoes} #Ill People =${ill} `;
 			alert(congratsMsg);
-		} else	if (this.model.get('loading')) {
-			text = "Calculating simulation...";
+		} else if (this.model.get('loading')) {
+			text = TEXTS.topPanel.runState;
 		} else {
-			text = "Paused";
+			text = TEXTS.topPanel.pauseState;
 		}
 		this.$mainStatus.text(text);
 	},
@@ -109,13 +109,13 @@ const TopPanelView = Backbone.View.extend(
 	pause ()
 	{
 		this.model.set('play', false);
-		this.$playPauseButton.removeClass('playing');
+		this.$playPauseButton.removeClass('playing').attr('aria-label', TEXTS.topPanel.play);
 	},
 
 	startPlay (max)
 	{
 		this.model.set('play', true);
-		this.$playPauseButton.addClass('playing');
+		this.$playPauseButton.addClass('playing').attr('aria-label', TEXTS.topPanel.pause);
 		const incDay = ()=> {
 			max--;
 			if (max === 0) {

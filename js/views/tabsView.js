@@ -12,9 +12,9 @@ const TabsView = Backbone.View.extend(
 	initialize ()
 	{
 
-		this.$heatMap = $('<li class="heat-map disable-on-loading"></li>');
-		this.$noramlMap = $('<li class="normal-map disable-on-loading"></li>');
-		this.$graphView = $('<li class="graph-view disable-on-loading"></li>');
+		this.$heatMap = $(`<li class="heat-map disable-on-loading hint--bottom-right" aria-label="${TEXTS.topPanel.heatMap}"></li>`);
+		this.$noramlMap = $(`<li class="normal-map disable-on-loading hint--bottom" aria-label="${TEXTS.topPanel.normalMap}"></li>`);
+		this.$graphView = $(`<li class="graph-view disable-on-loading hint--bottom-left" aria-label="${TEXTS.topPanel.graph}"></li>`);
 		this.$el
 			.append(this.$heatMap)
 			.append(this.$noramlMap)

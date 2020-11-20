@@ -44,7 +44,7 @@
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 }
-.period.hot-period::before {
+.period.dry-period::before {
 	background-image: url("../svgs/all/sun.svg");
 }
 .day {
