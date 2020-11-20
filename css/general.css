@@ -1,0 +1,12 @@
+﻿.container
+{
+	padding: 10px;
+}
+button {
+	border-radius: 4px;
+	cursor: pointer;
+	border: 1px solid #1b038a;
+}
+button:hover {
+	box-shadow: #1b038a 0px 0px 10px;
+}

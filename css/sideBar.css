@@ -1,0 +1,224 @@
+﻿#side-bar
+{
+	position: absolute;
+	border: 1px #1b038a solid;
+	top: 100px;
+	bottom: 0;
+	left: 0;
+	width: 200px;
+	background: #8bbdbc;
+}
+.kpi-img {
+	margin-right: 5px;
+	float: left;
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	background-size: 30px 30px;
+}
+.kpi-img.egg {
+	background-image: url("../svgs/all/eggs.svg");
+}
+.kpi-img.lar {
+	background-image: url("../svgs/all/larvae.svg");
+}
+.kpi-img.pup {
+	background-image: url("../svgs/all/popae.svg");
+}
+.kpi-img.cash {
+	background-image: url("../svgs/all/money.svg");
+}
+.kpi-img.pud {
+	background-image: url("../svgs/all/black-lake.svg");
+}
+.kpi-img.pop {
+	background-image: url("../svgs/all/multiple-users-silhouette.svg");
+}
+.kpi-img.hos {
+	background-image: url("../svgs/all/black-house.svg");
+}
+.kpi-img.ill {
+	background-image: url("../svgs/all/red-men.svg");
+	/*background-image: url("../svgs/all/ill.svg");*/
+}
+.kpi-img.mos {
+	background-image: url("../svgs/all/mosquito.svg");
+}
+.kpi-img.ill-mos {
+	background-image: url("../svgs/all/red-mosquito.svg");
+}
+.kpi-img.id {
+	background-image: url("../svgs/all/dog-tag.svg");
+}
+.kpi-img.sprayed {
+	background-image: url("../svgs/all/black-spray.svg");
+}
+.kpi-txt {
+	display: block;
+	line-height: 30px;
+	color: #1b038a;
+	margin-bottom: 10px;
+}.kpi-txt.warning {
+	color: #b80000;
+}
+
+.data-container.container
+{
+	padding-bottom: 0;
+	border-bottom: 1px #1b038a solid;
+}
+.actions-container {
+	position: relative;
+}
+.selected-panel {
+	color: #1b038a;
+	position: absolute;
+	transition: 0.5s ease-in-out left;
+	/*border: 1px #1b038a solid;*/
+	box-shadow: 0 0 10px #1b038a;
+	top: 0;
+	bottom: 0;
+	z-index: 1;
+	/*height: 350px;*/
+	left: -220px;
+	width: 200px;
+	background: #84e6e3;
+}
+.selected-panel.show-selected {
+	left: 0;
+}
+.big-img {
+	position: relative;
+	height: 100px;
+	background: white;
+}
+.big-img>* {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	transition: 0.5s ease-in-out opacity;
+	opacity: 0;
+	background-size: cover;
+}
+.p-s-img {
+	background-image: url("../imgs/big-puddle.jpg");
+}
+.p-w-img {
+	background-image: url("../imgs/small-puddle.jpg");
+}
+.h-img {
+	background-image: url("../imgs/hut.jpg");
+}
+.selected-house .h-img {
+	opacity: 1;
+}
+.selected-puddle.strong-puddle .p-s-img {
+	opacity: 1;
+}
+.selected-puddle.weak-puddle .p-w-img {
+	opacity: 1;
+}
+.selected-title {
+	font-size: 18px;
+	padding-bottom: 10px;
+}
+.selected-house .pud-container {
+	display: none;
+}
+.selected-puddle .hos-container {
+	display: none;
+}
+.search-drone {
+	background-image: url("../svgs/all/drone.svg");
+}
+.search-satellite {
+	background-image: url("../svgs/all/satellite.svg");
+}
+.search-puddles {
+	display: inline-block;
+	position: relative;
+	width: 80px;
+	height: 40px;
+	background-position: 5px 50%;
+	background-repeat: no-repeat;
+	background-size: 35px 35px;
+}
+.search-puddles::before {
+	content: "";
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: 45px 50%;
+}
+.search-in::before {
+	background-image: url("../svgs/all/village.svg");
+}
+.search-out::before {
+	background-image: url("../svgs/all/jungle.svg");
+}
+.spray-item {
+	display: inline-block;
+	position: relative;
+	width: 40px;
+	height: 40px;
+	background-image: url("../svgs/all/spray-bottle.svg");
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-size: 35px 35px;
+}
+.dry-puddle {
+	display: inline-block;
+	position: relative;
+	width: 40px;
+	height: 40px;
+	background-image: url("../svgs/all/hoe.svg");
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-size: 35px 35px;
+}
+.spray {
+	display: inline-block;
+	position: relative;
+	width: 80px;
+	height: 40px;
+	background-image: url("../svgs/all/spray-bottle.svg");
+	background-position: 5px 50%;
+	background-repeat: no-repeat;
+	background-size: 35px 35px;
+}
+.spray::before {
+	content: "";
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: 45px 50%;
+}
+.s-puddle::before {
+	background-image: url("../svgs/all/black-lake.svg");
+}
+.s-house::before {
+	background-image: url("../svgs/all/black-house.svg");
+}
+.cost {
+	margin-left: 5px;
+	vertical-align: top;
+	line-height: 40px;
+	color: #1b038a;
+}
+.action.disabled .cost {
+	color: #b80000;
+}
+.disabled button, .loading button:not(.enable-during-loading), .loading .disable-on-loading{
+	pointer-events: none;
+	opacity: 0.3;
+}
