@@ -42,6 +42,7 @@ const GraphMapView = Backbone.View.extend({
 				labels,
 				datasets: [
 					{
+						yAxisID: "m",
 						label: "Mosquitoes",
 						fill: false,
 						pointHoverRadius: 10,
@@ -50,6 +51,7 @@ const GraphMapView = Backbone.View.extend({
 						data: stats.mosquitoes
 					},
 					{
+						yAxisID: "m",
 						label: "Infectious Mosquitoes",
 						fill: false,
 						pointHoverRadius: 10,
@@ -58,6 +60,7 @@ const GraphMapView = Backbone.View.extend({
 						data: stats.illMosquitoes
 					},
 					{
+						yAxisID: "p",
 						label: "Ill People",
 						fill: false,
 						pointHoverRadius: 10,
@@ -69,11 +72,29 @@ const GraphMapView = Backbone.View.extend({
 			},
 			options: {
 				responsive: false,
+				scales: {
+					yAxes: [{
+						type: 'linear',
+						display: true,
+						position: 'left',
+						id: 'm',
+					}, {
+						type: 'linear',
+						display: true,
+						position: 'right',
+						id: 'p',
+						// grid line settings
+						gridLines: {
+							drawOnChartArea: false, // only want the grid lines for one axis to show up
+						},
+					}],
+				}
 			}
 		};
 		if (showLastYear) {
 			lineChartData.data.datasets.push(
 				{
+					yAxisID: "m",
 					label: "Last Year Mosquitoes",
 					fill: false,
 					pointHoverRadius: 10,
@@ -84,6 +105,7 @@ const GraphMapView = Backbone.View.extend({
 			);
 			lineChartData.data.datasets.push(
 				{
+					yAxisID: "m",
 					label: "Last Year Infectious Mosquitoes",
 					fill: false,
 					pointHoverRadius: 10,
@@ -94,6 +116,7 @@ const GraphMapView = Backbone.View.extend({
 			);
 			lineChartData.data.datasets.push(
 				{
+					yAxisID: "p",
 					label: "Last year Ill People",
 					fill: false,
 					pointHoverRadius: 10,
