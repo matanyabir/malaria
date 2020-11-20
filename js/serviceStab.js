@@ -77,13 +77,13 @@ const Service = (function()
 			const {kpis} = _data;
 			let mosFactor = 1; // multiply the mosquitoes with this number
 			if (sprayCount > 100) {
-				mosFactor = 0.99;
+				mosFactor = 0.9955;
 			}
 			else if (sprayCount > 50) {
-				mosFactor = 0.995;
+				mosFactor = 0.9965;
 			}
 			else if (sprayCount > 10) {
-				mosFactor = 0.997;
+				mosFactor = 0.9975;
 			}
 			else if (sprayCount > 0) {
 				mosFactor = 0.998;
