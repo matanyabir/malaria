@@ -52,6 +52,7 @@ const GraphMapView = Backbone.View.extend({
 						yAxisID: "m",
 						label: TEXTS.terms.illMosquitoes,
 						fill: false,
+						hidden: true, // starts as hidden by default
 						pointHoverRadius: 10,
 						borderColor: "rgb(150,43,139)",
 						hoverBorderColor: "rgb(150,10,133)",
@@ -107,6 +108,7 @@ const GraphMapView = Backbone.View.extend({
 					label: TEXTS.terms.illMosquitoesLY,
 					fill: false,
 					pointHoverRadius: 10,
+					hidden: true, // starts as hidden by default
 					borderColor: "rgb(250,91,208)",
 					hoverBorderColor: "rgb(250,5,190)",
 					data: lastYear.illMosquitoes
