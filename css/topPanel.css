@@ -9,7 +9,7 @@
 	background: #8bbdbc;
 }
 .logo {
-	position: absolute;
+	position: absolute !important; /* override hint class */
 	right: 10px;
 	top: 10px;
 	font-size: 36px;
@@ -32,9 +32,8 @@
 	height: 10px;
 	border-left: 1px #1b038a solid;
 }
-.period::before {
-	content: "";
-	position: absolute;
+.period-icon {
+	position: absolute !important; /* override hint class */
 	left: 0px;
 	right: 0px;
 	height: 30px;
@@ -44,7 +43,7 @@
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 }
-.period.dry-period::before {
+.period.dry-period>.period-icon {
 	background-image: url("../svgs/all/sun.svg");
 }
 .day {

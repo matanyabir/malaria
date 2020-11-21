@@ -33,6 +33,7 @@ const TEXTS = {
 		},
 	},
 	topPanel: {
+		logo: 'Detect is a non profit organization that will make the world a batter place',
 		runState: 'Calculating simulation...',
 		pauseState: 'Paused',
 		play: "Run the simulation",
@@ -48,6 +49,8 @@ const TEXTS = {
 		lastYear: 'Compare to the statistics of last year'
 	},
 	terms: {
+		wetPeriod: 'Wet Season',
+		dryPeriod: 'Dry Season',
 		mosquitoes: 'Mosquitoes',
 		illMosquitoes: 'Infectious Mosquitoes',
 		illPeople: 'Ill People',

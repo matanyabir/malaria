@@ -19,9 +19,15 @@ const TopPanelView = Backbone.View.extend(
 			const width = p.duration + `px`;
 			$period.css({left, width});
 			days += p.duration;
+			let hint;
 			if (p.type === PERIOD_TYPE.DRY) {
 				$period.addClass(`dry-period`);
+				hint = TEXTS.terms.dryPeriod;
+			} else {
+				hint = TEXTS.terms.wetPeriod;
 			}
+			const $periodIcon = $(`<div class="period-icon hint--bottom" aria-label="${hint}"></div>`);
+			$period.html($periodIcon);
 			$cal.append($period);
 		});
 		this.$day = $(`<span class="day"></span>`);
@@ -32,14 +38,14 @@ const TopPanelView = Backbone.View.extend(
 		this.$mainStatus = $(`<div class="main-status"></div>`);
 		this.$playPauseButton = $(`<button class="play-pause enable-during-loading hint--bottom-right" aria-label="${TEXTS.topPanel.play}"></button>`);
 		this.$nextDayButton = $(`<button class="next-day hint--bottom-right" aria-label="${TEXTS.topPanel.incDay}"></button>`);
-		this.$nextMonthButton = $(`<button class="next-month hint--bottom-right" aria-label="${TEXTS.topPanel.incMonth}""></button>`);
+		this.$nextMonthButton = $(`<button class="next-month hint--bottom-right" aria-label="${TEXTS.topPanel.incMonth}"></button>`);
 		this.$el.html($cal)
 			.append(this.$mainStatus)
 			.append(this.$playPauseButton)
 			.append(this.$nextDayButton)
 			.append(this.$nextMonthButton)
 			.append(tabsView.render().$el)
-			.append(`<div class="logo">DETECT</div>`);
+			.append(`<div class="logo hint--left" aria-label="${TEXTS.topPanel.logo}">DETECT</div>`);
 		this.model.on('change:day', this.renderDay, this);
 		this.model.on('change:loading', this.onLoadingChange, this);
 		this.model.on('change:end', this.renderStatus, this);
