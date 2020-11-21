@@ -6,9 +6,8 @@ const GraphMapView = Backbone.View.extend({
 		this.model.on('change:showLastYear', this.onShowLastYearChange, this);
 		this.$canvasContainer = $('<div class="canvas-container"></div>');
 		if (this.model.get('lastYear')) {
-			this.$lastYearBtn = $('<button class="last-year" height="250" width="500"></button>');
+			this.$lastYearBtn = $(`<button class="last-year hint--bottom-right" aria-label="${TEXTS.graph.lastYear}" height="250" width="500"></button>`);
 			this.$el.html(this.$lastYearBtn);
-
 		}
 		this.$el.append(this.$canvasContainer);
 		return this;
@@ -42,7 +41,7 @@ const GraphMapView = Backbone.View.extend({
 				datasets: [
 					{
 						yAxisID: "m",
-						label: "Mosquitoes",
+						label: TEXTS.terms.mosquitoes,
 						fill: false,
 						pointHoverRadius: 10,
 						borderColor: "rgb(39,58,150)",
@@ -51,7 +50,7 @@ const GraphMapView = Backbone.View.extend({
 					},
 					{
 						yAxisID: "m",
-						label: "Infectious Mosquitoes",
+						label: TEXTS.terms.illMosquitoes,
 						fill: false,
 						pointHoverRadius: 10,
 						borderColor: "rgb(150,43,139)",
@@ -60,7 +59,7 @@ const GraphMapView = Backbone.View.extend({
 					},
 					{
 						yAxisID: "p",
-						label: "Ill People",
+						label: TEXTS.terms.illPeople,
 						fill: false,
 						pointHoverRadius: 10,
 						borderColor: "rgb(33,150,55)",
@@ -94,7 +93,7 @@ const GraphMapView = Backbone.View.extend({
 			lineChartData.data.datasets.push(
 				{
 					yAxisID: "m",
-					label: "Last Year Mosquitoes",
+					label: TEXTS.terms.mosquitoesLY,
 					fill: false,
 					pointHoverRadius: 10,
 					borderColor: "rgb(105,156,250)",
@@ -105,7 +104,7 @@ const GraphMapView = Backbone.View.extend({
 			lineChartData.data.datasets.push(
 				{
 					yAxisID: "m",
-					label: "Last Year Infectious Mosquitoes",
+					label: TEXTS.terms.illMosquitoesLY,
 					fill: false,
 					pointHoverRadius: 10,
 					borderColor: "rgb(250,91,208)",
@@ -116,7 +115,7 @@ const GraphMapView = Backbone.View.extend({
 			lineChartData.data.datasets.push(
 				{
 					yAxisID: "p",
-					label: "Last year Ill People",
+					label: TEXTS.terms.illPeopleLY,
 					fill: false,
 					pointHoverRadius: 10,
 					borderColor: "rgb(62,212,95)",

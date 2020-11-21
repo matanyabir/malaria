@@ -44,7 +44,16 @@ const TEXTS = {
 		normalMap: "Map View",
 		graph: "Graphs View",
 	},
+	graph: {
+		lastYear: 'Compare to the statistics of last year'
+	},
 	terms: {
+		mosquitoes: 'Mosquitoes',
+		illMosquitoes: 'Infectious Mosquitoes',
+		illPeople: 'Ill People',
+		mosquitoesLY: 'Last Year Mosquitoes',
+		illMosquitoesLY: 'Last Year Infectious Mosquitoes',
+		illPeopleLY: 'Last Year Ill People',
 		seasonalPuddle: 'Seasonal Puddle',
 		permanentPuddle: 'Permanent Puddle',
 		house: 'House',
