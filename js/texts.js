@@ -60,6 +60,9 @@ const TEXTS = {
 		seasonalPuddle: 'Seasonal Puddle',
 		permanentPuddle: 'Permanent Puddle',
 		house: 'House',
+		sprayedHouses: 'Sprayed Houses',
+		sprayedPuddles: 'Sprayed Puddles',
+		dryedPuddles: 'Destroyed Puddles',
 		daysLeft: 'days left', // e.g.: "12 days left"
 		notSprayed: 'Not sprayed',
 	}

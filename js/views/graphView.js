@@ -2,6 +2,17 @@ const GraphMapView = Backbone.View.extend({
 	className: 'graph-v',
 	initialize ()
 	{
+		this.spryImage = new Image(20, 20);
+		this.dryImage = new Image(20, 20);
+		// this.spryImage.onload = function() {
+		// 	alert('image loaded');
+		// };
+		// this.spryImage.onerror = function() {
+		// 	alert('image error3');
+		// };
+		// TBD: better path...
+		this.spryImage.src = "/malaria2/svgs/all/spray-bottle.svg";
+		this.dryImage.src = "/malaria2/svgs/all/hoe.svg";
 		this.model.on('change:day', this.onDayChange, this);
 		this.model.on('change:showLastYear', this.onShowLastYearChange, this);
 		this.$canvasContainer = $('<div class="canvas-container"></div>');
@@ -44,6 +55,7 @@ const GraphMapView = Backbone.View.extend({
 						label: TEXTS.terms.mosquitoes,
 						fill: false,
 						pointHoverRadius: 10,
+						backgroundColor: "rgb(107,120,188)",
 						borderColor: "rgb(39,58,150)",
 						hoverBorderColor: "rgb(12,5,150)",
 						data: stats.mosquitoes
@@ -54,6 +66,7 @@ const GraphMapView = Backbone.View.extend({
 						fill: false,
 						hidden: true, // starts as hidden by default
 						pointHoverRadius: 10,
+						backgroundColor: "rgb(173,131,183)",
 						borderColor: "rgb(150,43,139)",
 						hoverBorderColor: "rgb(150,10,133)",
 						data: stats.illMosquitoes
@@ -63,9 +76,51 @@ const GraphMapView = Backbone.View.extend({
 						label: TEXTS.terms.illPeople,
 						fill: false,
 						pointHoverRadius: 10,
+						backgroundColor: "rgb(116,189,134)",
 						borderColor: "rgb(33,150,55)",
 						hoverBorderColor: "rgb(0,150,33)",
 						data: stats.ill
+					},
+					{
+						yAxisID: "s",
+						label: TEXTS.terms.sprayedHouses,
+						pointStyle: this.spryImage,
+						// pointStyle: 'star',
+						pointRadius: 15,
+						fill: false,
+						hidden: true, // starts as hidden by default
+						showLine: false,
+						pointHoverRadius: 20,
+						borderColor: "rgb(247,244,103)",
+						backgroundColor: "rgb(247,244,103)",
+						data: stats.sprayHos
+					},
+					{
+						yAxisID: "s",
+						label: TEXTS.terms.sprayedPuddles,
+						pointStyle: this.spryImage,
+						// pointStyle: 'star',
+						pointRadius: 15,
+						fill: false,
+						hidden: true, // starts as hidden by default
+						showLine: false,
+						pointHoverRadius: 20,
+						borderColor: "rgb(247,244,103)",
+						backgroundColor: "rgb(247,244,103)",
+						data: stats.sprayPud
+					},
+					{
+						yAxisID: "d",
+						label: TEXTS.terms.dryedPuddles,
+						pointStyle: this.dryImage,
+						pointRadius: 15,
+						fill: false,
+						hidden: true, // starts as hidden by default
+						showLine: false,
+						pointHoverRadius: 20,
+						borderColor: "rgb(102,27,35)",
+						backgroundColor: "rgb(102,27,35)",
+						data: stats.dryPud
 					},
 				]
 			},
@@ -76,16 +131,24 @@ const GraphMapView = Backbone.View.extend({
 						type: 'linear',
 						display: true,
 						position: 'left',
-						id: 'm',
+						id: 'm', // mosquitoes
 					}, {
 						type: 'linear',
 						display: true,
 						position: 'right',
-						id: 'p',
+						id: 'p', // people
 						// grid line settings
 						gridLines: {
 							drawOnChartArea: false, // only want the grid lines for one axis to show up
 						},
+					}, {
+						type: 'linear',
+						display: false,
+						id: 's', // spray action
+					}, {
+						type: 'linear',
+						display: false,
+						id: 'd', // dry action
 					}],
 				}
 			}
@@ -97,6 +160,7 @@ const GraphMapView = Backbone.View.extend({
 					label: TEXTS.terms.mosquitoesLY,
 					fill: false,
 					pointHoverRadius: 10,
+					backgroundColor: "rgb(108,223,250)",
 					borderColor: "rgb(105,156,250)",
 					hoverBorderColor: "rgb(66,133,250)",
 					data: lastYear.mosquitoes
@@ -109,8 +173,9 @@ const GraphMapView = Backbone.View.extend({
 					fill: false,
 					pointHoverRadius: 10,
 					hidden: true, // starts as hidden by default
-					borderColor: "rgb(250,91,208)",
-					hoverBorderColor: "rgb(250,5,190)",
+					backgroundColor: "rgb(239,160,250)",
+					borderColor: "rgb(210,103,250)",
+					hoverBorderColor: "rgb(209,72,250)",
 					data: lastYear.illMosquitoes
 				}
 			);
@@ -120,6 +185,7 @@ const GraphMapView = Backbone.View.extend({
 					label: TEXTS.terms.illPeopleLY,
 					fill: false,
 					pointHoverRadius: 10,
+					backgroundColor: "rgb(159,234,153)",
 					borderColor: "rgb(62,212,95)",
 					hoverBorderColor: "rgb(0,212,60)",
 					data: lastYear.ill

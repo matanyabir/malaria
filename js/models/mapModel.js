@@ -16,6 +16,7 @@ const MapModel = Backbone.Model.extend(
 		mosquitoes: 0, // array of mosquitoes' positions
 		tabView: TABS_VIEWS.NORMAL_MAP, // the selected view
 		stats: {}, // all kpis until today
+		actions: {}, // the actions that the user perform today (will be in next day stats)
 	}
 
 	/**
@@ -47,6 +48,7 @@ const MapModel = Backbone.Model.extend(
 		const costsModel = new KpisModel(costs);
 		this.set({size, time, cash, houses, puddles, kpisModel, costsModel, id, lastYear});
 		this.updatePuddlesCount();
+		this.addActionsToKpis(kpis);
 		this.addToStats(kpis);
 		return this;
 	}
@@ -60,11 +62,12 @@ const MapModel = Backbone.Model.extend(
 		const getMosquitoes = this.get('tabView') === TABS_VIEWS.HEAT_MAP;
 		Service.incDay(this.get('id'), getMosquitoes, ({kpis, mosquitoes})=> {
 			this.set('loading', false);
-			this.addToStats(kpis);
 			this.set('mosquitoes', mosquitoes);
 			const kpisModel = this.get('kpisModel');
 			kpisModel.set(kpis);
 			this.updateSelectedKpis();
+			this.addActionsToKpis(kpis);
+			this.addToStats(kpis);
 			let day = this.get('day') + 1;
 			this.set({day});
 			const {periods} = this.get('time');
@@ -110,6 +113,16 @@ const MapModel = Backbone.Model.extend(
 		// console.log('stats.illMosquitoes', JSON.stringify(stats.illMosquitoes));
 		// console.log('stats.ill', JSON.stringify(stats.ill));
 	}
+	// add current actions to kpis object, and init the actions (for next day)
+	,addActionsToKpis (kpis)
+	{
+		let actions = this.get('actions');
+		kpis.sprayHos = actions.sprayHos || null;
+		kpis.sprayPud = actions.sprayPud || null;
+		kpis.dryPud = actions.dryPud || null;
+		actions = {sprayHos: 0, sprayPud: 0, dryPud: 0};
+		this.set({actions});
+	}
 	,loadMosquitoes (cb)
 	{
 		if (this.get('end')) {
@@ -153,14 +166,17 @@ const MapModel = Backbone.Model.extend(
 	,sprayPuddles (cost)
 	{
 		const cash = this.get('cash') - cost;
-		const puddlesIds = [];
 		this.set({cash});
+		const puddlesIds = [];
 		this.get('puddles').each( model => {
 			if (model.get('visible')) {
 				puddlesIds.push(model.get('id'));
 				model.spray();
 			}
 		});
+		const actions = this.get('actions');
+		actions.sprayPud += puddlesIds.length;
+
 		this.set('loading', true);
 		Service.sprayPuddles(this.get('id'), puddlesIds, (kpis)=> {
 			this.set('loading', false);
@@ -168,6 +184,9 @@ const MapModel = Backbone.Model.extend(
 	}
 	,dryPuddle (cost, model)
 	{
+		const actions = this.get('actions');
+		actions.dryPud++;
+
 		const cash = this.get('cash') - cost;
 		this.set({cash});
 		// const puddles = this.get('puddles');
@@ -189,6 +208,8 @@ const MapModel = Backbone.Model.extend(
 	{
 		const cash = this.get('cash') - cost;
 		this.set({cash});
+		const actions = this.get('actions');
+		actions.sprayPud++;
 		model.spray();
 		this.set('selectedSpray', model.get('spray'));
 		this.set('loading', true);
@@ -203,6 +224,8 @@ const MapModel = Backbone.Model.extend(
 		this.get('houses').each( model => {
 			model.spray();
 		});
+		const actions = this.get('actions');
+		actions.sprayHos += this.get('houses').length;
 		this.set('loading', true);
 		Service.sprayHouses(this.get('id'), "all", (kpis)=> {
 			this.set('loading', false);
@@ -212,6 +235,8 @@ const MapModel = Backbone.Model.extend(
 	{
 		const cash = this.get('cash') - cost;
 		this.set({cash});
+		const actions = this.get('actions');
+		actions.sprayHos++;
 		model.spray();
 		this.set('selectedSpray', model.get('spray'));
 		this.set('loading', true);
