@@ -60,7 +60,7 @@ const MapModel = Backbone.Model.extend(
 		}
 		this.set('loading', true);
 		const getMosquitoes = this.get('tabView') === TABS_VIEWS.HEAT_MAP;
-		Service.incDay(this.get('id'), getMosquitoes, ({kpis, mosquitoes})=> {
+		Service.incDay(this.get('id'), getMosquitoes, ({kpis, mosquitoes, dialog})=> {
 			this.set('loading', false);
 			this.set('mosquitoes', mosquitoes);
 			const kpisModel = this.get('kpisModel');
@@ -93,7 +93,15 @@ const MapModel = Backbone.Model.extend(
 			}
 			this.get('puddles').each( model => model.dayPass());
 			this.get('houses').each( model => model.dayPass());
-			if (cb) {
+			if (dialog) {
+				if (dialog.type === DIALOG_TYPE.INFORMATION) {
+					const buttons = [{
+						text: TEXTS.terms.continue,
+						cb
+					}];
+					DialogManager.openDialog(dialog.title, dialog.text, buttons);
+				}
+			} else if (cb) {
 				cb();
 			}
 

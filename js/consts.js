@@ -4,6 +4,12 @@ const PERIOD_TYPE = {
 	,WET: 1
 };
 
+// type for dialogs from the server after incDay
+const DIALOG_TYPE = {
+	INFORMATION: 0 // e.g.: spray period ended
+	,GAME_OVER: 1 // e.g.: too many ill people
+};
+
 // location type for puddles
 const LOCATION = {
 	INSIDE_VILLAGE: 0

@@ -49,6 +49,7 @@ const TEXTS = {
 		lastYear: 'Compare to the statistics of last year'
 	},
 	terms: {
+		continue: 'Continue',
 		wetPeriod: 'Wet Season',
 		dryPeriod: 'Dry Season',
 		mosquitoes: 'Mosquitoes',

@@ -1,0 +1,49 @@
+﻿.dialog-box-overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0,0,0,0.3);
+	opacity: 0;
+	transition: opacity 300ms ease-in-out;
+}
+.dialog-box-overlay.on {
+	opacity: 1;
+}
+.dialog-box {
+	padding: 20px;
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	width: 200px;
+	margin-left: -100px;
+	background-color: #fff;
+	box-shadow: #1b038a 0 0 10px;
+	border: #1b038a solid 1px;
+	color: #1b038a;
+	border-radius: 6px;
+	transform: scale(0);
+	transition: transform 300ms ease-in-out;
+}
+.dialog-box-overlay.on .dialog-box{
+	transform: scale(1);
+}
+.dialog-box-overlay .dialog-title {
+	text-align: center;
+	font-size: 20px;
+	border-bottom: 1px #1b038a solid;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+.dialog-box-overlay .dialog-text {
+	font-size: 14px;
+	border-bottom: 1px #1b038a solid;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+.dialog-box-overlay .buttons-container button{
+	color: #1b038a;
+	padding: 10px;
+	margin-right: 10px;
+}

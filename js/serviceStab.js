@@ -8,6 +8,8 @@ const Service = (function()
 	let wet = true;
 	let days = 0;
 	let sprayCount = 0;
+	let sprayPuddlesLeft = -1;
+	let lastPuddlesIds;
 
 	/**
 	 * create a new level ("level instance") for "level class id"
@@ -138,7 +140,18 @@ const Service = (function()
 			if (getMosquitoes) {
 				mosquitoes = _getMosquitoes();
 			}
-			cbSuccess({kpis, mosquitoes});
+			sprayPuddlesLeft--;
+			let dialog = null;
+			if (sprayPuddlesLeft === 0) {
+				const killedPupae = Math.ceil(Math.random()*10*lastPuddlesIds.length);
+				const killedEggs = Math.ceil(Math.random()*15*lastPuddlesIds.length);
+				dialog = {
+					type: DIALOG_TYPE.INFORMATION,
+					title: 'Spray Puddles Over',
+					text: `The spray of the puddles "${lastPuddlesIds.join(',')}" was over. This spray killed ${killedPupae} papae, and ${killedEggs} eggs.`
+				};
+			}
+			cbSuccess({kpis, mosquitoes, dialog});
 		}, 50 + Math.random()*100);
 	};
 
@@ -187,6 +200,8 @@ const Service = (function()
 	 */
 	me.sprayPuddles = function(mapInstanceId, puddlesIds, cbSuccess, cbFail)
 	{
+		sprayPuddlesLeft = 7;
+		lastPuddlesIds = puddlesIds;
 		sprayCount += puddlesIds.length;
 		setTimeout(function(){
 			cbSuccess({});
