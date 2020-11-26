@@ -147,8 +147,8 @@ const Service = (function()
 				alreadyFailed = true;
 				dialog = {
 					type: DIALOG_TYPE.GAME_OVER,
-					title: 'Level Failed',
-					text: `There are ${kpis.ill} ill people in the village, this is too much...`
+					title: 'Game Over',
+					text: `Level failed. There are ${kpis.ill} ill people in the village, this is too much...`
 				};
 			} else if (sprayPuddlesLeft === 0) {
 				const killedPupae = Math.ceil(Math.random()*10*lastPuddlesIds.length);
