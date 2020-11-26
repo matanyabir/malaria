@@ -11,7 +11,7 @@
 .dialog-box-overlay.on {
 	opacity: 1;
 }
-.dialog-box {
+.dialog-box-overlay .dialog-box {
 	padding: 20px;
 	position: absolute;
 	top: 20%;
@@ -46,4 +46,23 @@
 	color: #1b038a;
 	padding: 10px;
 	margin-right: 10px;
+}
+
+.dialog-box-overlay.fail .dialog-box {
+	box-shadow: #9b1a19 0 0 10px;
+	border: #9b1a19 solid 1px;
+	color: #9b1a19;
+}
+.dialog-box-overlay.fail .dialog-title {
+	border-bottom: 1px #9b1a19 solid;
+}
+.dialog-box-overlay.fail .dialog-text {
+	border-bottom: 1px #9b1a19 solid;
+}
+.dialog-box-overlay.fail .buttons-container button{
+	color: #9b1a19;
+	border: 1px solid #9b1a19;
+}
+.dialog-box-overlay.fail .buttons-container button:hover{
+	box-shadow: #9b1a19 0px 0px 10px;
 }

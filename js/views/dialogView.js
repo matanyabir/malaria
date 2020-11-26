@@ -5,6 +5,7 @@ const DialogView = Backbone.View.extend({
 	render ()
 	{
 		const title = this.model.get('title');
+		const type = this.model.get('type');
 		const text = this.model.get('text');
 		const buttons = this.model.get('buttons');
 		const $title = $('<div class="dialog-title"></div>').text(title);
@@ -29,6 +30,9 @@ const DialogView = Backbone.View.extend({
 		});
 		const $dialog = $('<div class="dialog-box"></div>').append($title).append($text).append($btns);
 		this.$el.html($dialog);
+		if (type === DIALOG_TYPE.GAME_OVER) {
+			this.$el.addClass('fail');
+		}
 		// for the animation:
 		setTimeout(()=>{
 			this.$el.addClass('on');

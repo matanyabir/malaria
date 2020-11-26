@@ -94,13 +94,17 @@ const MapModel = Backbone.Model.extend(
 			this.get('puddles').each( model => model.dayPass());
 			this.get('houses').each( model => model.dayPass());
 			if (dialog) {
-				if (dialog.type === DIALOG_TYPE.INFORMATION) {
-					const buttons = [{
-						text: TEXTS.terms.continue,
-						cb
-					}];
-					DialogManager.openDialog(dialog.title, dialog.text, buttons);
+				const buttons = [{
+					text: TEXTS.terms.continue,
+					cb
+				}];
+				if (dialog.type === DIALOG_TYPE.GAME_OVER) {
+					buttons.push({
+						text: TEXTS.terms.restartLevel,
+						cb: ()=>location.reload() // TBD: do something better when we support levels, etc.
+					});
 				}
+				DialogManager.openDialog(dialog.type, dialog.title, dialog.text, buttons);
 			} else if (cb) {
 				cb();
 			}

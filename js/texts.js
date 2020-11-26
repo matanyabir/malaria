@@ -49,6 +49,7 @@ const TEXTS = {
 		lastYear: 'Compare to the statistics of last year'
 	},
 	terms: {
+		restartLevel: 'Restart Level',
 		continue: 'Continue',
 		wetPeriod: 'Wet Season',
 		dryPeriod: 'Dry Season',

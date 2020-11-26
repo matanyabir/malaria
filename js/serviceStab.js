@@ -9,6 +9,7 @@ const Service = (function()
 	let days = 0;
 	let sprayCount = 0;
 	let sprayPuddlesLeft = -1;
+	let alreadyFailed;
 	let lastPuddlesIds;
 
 	/**
@@ -142,7 +143,14 @@ const Service = (function()
 			}
 			sprayPuddlesLeft--;
 			let dialog = null;
-			if (sprayPuddlesLeft === 0) {
+			if (kpis.ill > 22 && !alreadyFailed) {
+				alreadyFailed = true;
+				dialog = {
+					type: DIALOG_TYPE.GAME_OVER,
+					title: 'Level Failed',
+					text: `There are ${kpis.ill} ill people in the village, this is too much...`
+				};
+			} else if (sprayPuddlesLeft === 0) {
 				const killedPupae = Math.ceil(Math.random()*10*lastPuddlesIds.length);
 				const killedEggs = Math.ceil(Math.random()*15*lastPuddlesIds.length);
 				dialog = {
