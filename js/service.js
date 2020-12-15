@@ -89,7 +89,7 @@ const Service = (function()
 	{
 		const data = {housesIds};
 		$.ajax({
-			url: SERVER_URL + "/map/" + mapInstanceId + "/spray",
+			url: SERVER_URL + "/map/" + mapInstanceId + "/spray/houses",
 			type: 'PUT',
 			data: JSON.stringify(data),
 			success: function(data) {
@@ -147,7 +147,7 @@ const Service = (function()
 	{
 		const data = {puddlesIds};
 		$.ajax({
-			url: SERVER_URL + "/map/" + mapInstanceId + "/spray",
+			url: SERVER_URL + "/map/" + mapInstanceId + "/spray/puddles",
 			type: 'PUT',
 			data: JSON.stringify(data),
 			success: function(data) {

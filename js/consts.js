@@ -1,7 +1,7 @@
 // type for period
 const PERIOD_TYPE = {
-	DRY: 0
-	,WET: 1
+	DRY: "dry"
+	,WET: "wet"
 };
 
 // type for dialogs from the server after incDay
