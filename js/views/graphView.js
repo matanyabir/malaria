@@ -35,11 +35,11 @@ const GraphMapView = Backbone.View.extend({
 		const lastYear = this.model.get('lastYear');
 		let time = new Date(this.model.get('time').start).getTime();
 		let arr;
-		// we assume that we have all kpis, so we choose arbitrary the "ill" just for the count...
+		// we assume that we have all kpis, so we choose arbitrary the "infectedHuman" just for the count...
 		if (showLastYear) {
-			arr = lastYear.ill;
+			arr = lastYear.infectedHuman;
 		} else {
-			arr = stats.ill;
+			arr = stats.infectedHuman;
 		}
 		const labels = arr.map((x, i) => {
 			const date = new Date(time + i * 24 * 60 * 60 * 1000);
@@ -62,14 +62,14 @@ const GraphMapView = Backbone.View.extend({
 					},
 					{
 						yAxisID: "m",
-						label: TEXTS.terms.illMosquitoes,
+						label: TEXTS.terms.infectiousMosquitoes,
 						fill: false,
 						hidden: true, // starts as hidden by default
 						pointHoverRadius: 10,
 						backgroundColor: "rgb(173,131,183)",
 						borderColor: "rgb(150,43,139)",
 						hoverBorderColor: "rgb(150,10,133)",
-						data: stats.illMosquitoes
+						data: stats.infectiousMosquitoes
 					},
 					{
 						yAxisID: "p",
@@ -79,7 +79,7 @@ const GraphMapView = Backbone.View.extend({
 						backgroundColor: "rgb(116,189,134)",
 						borderColor: "rgb(33,150,55)",
 						hoverBorderColor: "rgb(0,150,33)",
-						data: stats.ill
+						data: stats.infectedHuman
 					},
 					{
 						yAxisID: "s",
@@ -169,14 +169,14 @@ const GraphMapView = Backbone.View.extend({
 			lineChartData.data.datasets.push(
 				{
 					yAxisID: "m",
-					label: TEXTS.terms.illMosquitoesLY,
+					label: TEXTS.terms.infectiousMosquitoesLY,
 					fill: false,
 					pointHoverRadius: 10,
 					hidden: true, // starts as hidden by default
 					backgroundColor: "rgb(239,160,250)",
 					borderColor: "rgb(210,103,250)",
 					hoverBorderColor: "rgb(209,72,250)",
-					data: lastYear.illMosquitoes
+					data: lastYear.infectiousMosquitoes
 				}
 			);
 			lineChartData.data.datasets.push(
@@ -188,7 +188,7 @@ const GraphMapView = Backbone.View.extend({
 					backgroundColor: "rgb(159,234,153)",
 					borderColor: "rgb(62,212,95)",
 					hoverBorderColor: "rgb(0,212,60)",
-					data: lastYear.ill
+					data: lastYear.infectedHuman
 				}
 			);
 		}

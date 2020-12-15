@@ -9,12 +9,12 @@ const KpisModel = Backbone.Model.extend(
 	defaults:
 	{
 		population: 0, // current amount of humans
-		ill: 0, // current amount of ill humans
+		infectedHuman: 0, // current amount of ill humans
 		mosquitoes: 0, // current amount of mosquitoes
-		illMosquitoes: 0, // current amount of ill mosquitoes
+		infectiousMosquitoes: 0, // current amount of ill mosquitoes
 		puddles: 0, // current amount of puddles that are relevant now
 		visiblePuddles: 0, // current amount of puddles that are relevant now, and also founded
-		puddlesMap: {} // map of count of eggs, lavraes, popaes per puddle id
+		habitatsLifeInfo: {} // map of count of eggs, lavraes, popaes per puddle id
 	}
 
 });

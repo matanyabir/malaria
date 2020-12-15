@@ -12,7 +12,7 @@ const PuddleModel = Backbone.Model.extend(
 		pos: null
 		,id: null
 		,state: null // current state PUDDLE_STATE
-		,loc: LOCATION.INSIDE_VILLAGE
+		,isInVillage: true
 		,visible: false
 		,isSatellite: false // can be found with satellite
 	},

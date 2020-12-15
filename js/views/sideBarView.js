@@ -58,7 +58,7 @@ const SideBarView = Backbone.View.extend(
 			.append(`<span class="kpi-img pud hint--top-right" aria-label="${TEXTS.sidePanel.kpis.pud}"></span>`).append(this.$pud)
 			.append(`<span class="kpi-img hos hint--top-right" aria-label="${TEXTS.sidePanel.kpis.hos}"></span>`).append(this.$hos)
 			.append(`<span class="kpi-img pop hint--top-right" aria-label="${TEXTS.sidePanel.kpis.pop}"></span>`).append(this.$pop)
-			.append(`<span class="kpi-img ill hint--top-right" aria-label="${TEXTS.sidePanel.kpis.ill}"></span>`).append(this.$ill)
+			.append(`<span class="kpi-img ill hint--top-right" aria-label="${TEXTS.sidePanel.kpis.infectedHuman}"></span>`).append(this.$ill)
 			.append(`<span class="kpi-img mos hint--top-right" aria-label="${TEXTS.sidePanel.kpis.mos}"></span>`).append(this.$mos)
 			.append(`<span class="kpi-img ill-mos hint--top-right" aria-label="${TEXTS.sidePanel.kpis.illMos}"></span>`).append(this.$illMos);
 		this.$actions = $(`<div class="actions-container container"></div>`);
@@ -84,9 +84,9 @@ const SideBarView = Backbone.View.extend(
 		kpisModel.on('change:visiblePuddles', this.onVisiblePuddlesChange, this);
 		kpisModel.on('change:puddles', this.calcPud, this);
 		kpisModel.on('change:population', this.calcPop, this);
-		kpisModel.on('change:ill', this.calcIll, this);
+		kpisModel.on('change:infectedHuman', this.calcIll, this);
 		kpisModel.on('change:mosquitoes', this.calcMos, this);
-		kpisModel.on('change:illMosquitoes', this.calcIllMos, this);
+		kpisModel.on('change:infectiousMosquitoes', this.calcIllMos, this);
 		this.model.on('change:cash', this.onCashChange, this);
 		this.model.on('change:loading', this.onLoadingChange, this);
 		return this;
@@ -135,7 +135,7 @@ const SideBarView = Backbone.View.extend(
 	calcIll ()
 	{
 		const kpisModel = this.model.get('kpisModel');
-		const count = kpisModel.get('ill');
+		const count = kpisModel.get('infectedHuman');
 		this.$ill.text(Utils.numTxt(count));
 		if (count>20) // tbd rules
 		{
@@ -159,7 +159,7 @@ const SideBarView = Backbone.View.extend(
 	calcIllMos ()
 	{
 		const kpisModel = this.model.get('kpisModel');
-		const count = kpisModel.get('illMosquitoes');
+		const count = kpisModel.get('infectiousMosquitoes');
 		this.$illMos.text(Utils.numTxt(count));
 		if (count>250) // tbd rules
 		{
@@ -171,22 +171,22 @@ const SideBarView = Backbone.View.extend(
 
 	searchInClick ()
 	{
-		this.model.searchPuddles(this.searchInCost(), LOCATION.INSIDE_VILLAGE);
+		this.model.searchPuddles(this.searchInCost(), true);
 	},
 
 	searchOutClick ()
 	{
-		this.model.searchPuddles(this.searchOutCost(), LOCATION.OUTSIDE_VILLAGE);
+		this.model.searchPuddles(this.searchOutCost(), false);
 	},
 
 	searchInSatelliteClick ()
 	{
-		this.model.searchPuddles(this.searchInSatelliteCost(), LOCATION.INSIDE_VILLAGE, true);
+		this.model.searchPuddles(this.searchInSatelliteCost(), true, true);
 	},
 
 	searchOutSatelliteClick ()
 	{
-		this.model.searchPuddles(this.searchOutSatelliteCost(), LOCATION.OUTSIDE_VILLAGE, true);
+		this.model.searchPuddles(this.searchOutSatelliteCost(), false, true);
 	},
 
 	sprayPuddleClick ()

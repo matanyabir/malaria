@@ -20,7 +20,7 @@ const TopPanelView = Backbone.View.extend(
 			$period.css({left, width});
 			days += p.duration;
 			let hint;
-			if (p.type === PERIOD_TYPE.DRY) {
+			if (p.climate === PERIOD_TYPE.DRY) {
 				$period.addClass(`dry-period`);
 				hint = TEXTS.terms.dryPeriod;
 			} else {
@@ -86,9 +86,9 @@ const TopPanelView = Backbone.View.extend(
 			text = "TBD. Level end.";
 			const kpisModel = this.model.get('kpisModel');
 			const mosquitoes = kpisModel.get('mosquitoes');
-			const illMosquitoes = kpisModel.get('illMosquitoes');
-			const ill = kpisModel.get('ill');
-			let congratsMsg = `Congrats! You finished the level! #Mosquitoes =${mosquitoes} #InfectiousMosquitoes =${illMosquitoes} #Ill People =${ill} `;
+			const infectiousMosquitoes = kpisModel.get('infectiousMosquitoes');
+			const infectedHuman = kpisModel.get('infectedHuman');
+			let congratsMsg = `Congrats! You finished the level! #Mosquitoes =${mosquitoes} #InfectiousMosquitoes =${infectiousMosquitoes} #Ill People =${infectedHuman} `;
 			alert(congratsMsg);
 		} else if (this.model.get('loading')) {
 			text = TEXTS.topPanel.runState;

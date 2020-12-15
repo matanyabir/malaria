@@ -122,7 +122,7 @@ const MapModel = Backbone.Model.extend(
 			}
 		});
 		// console.log('stats.mosquitoes', JSON.stringify(stats.mosquitoes));
-		// console.log('stats.illMosquitoes', JSON.stringify(stats.illMosquitoes));
+		// console.log('stats.infectiousMosquitoes', JSON.stringify(stats.infectiousMosquitoes));
 		// console.log('stats.ill', JSON.stringify(stats.ill));
 	}
 	// add current actions to kpis object, and init the actions (for next day)
@@ -156,13 +156,13 @@ const MapModel = Backbone.Model.extend(
 	    const periodIndex = this.get('periodIndex');
 	    return periods[periodIndex];
 	}
-	,searchPuddles (cost, loc, isSatellite)
+	,searchPuddles (cost, isInVillage, isSatellite)
 	{
 		const cash = this.get('cash') - cost;
 		this.set({cash});
 		let puddlesFound = 0;
 		this.get('puddles').each( model => {
-			if (model.get('loc') === loc) {
+			if (model.get('isInVillage') == isInVillage) {
 				const isFound = model.found(isSatellite);
 				if (isFound) {
 					puddlesFound++;
@@ -276,7 +276,7 @@ const MapModel = Backbone.Model.extend(
 			this.set('selectedSpray', selectedItem.get('spray'));
 			if (selectedItem.elementType === 'puddle') {
 				const kpisModel = this.get('kpisModel');
-				const p = kpisModel.get('puddlesMap')[selectedItem.get('id')];
+				const p = kpisModel.get('habitatsLifeInfo')[selectedItem.get('id')];
 				this.set('selectedEggs', p.e || 0);
 				this.set('selectedLars', p.l || 0);
 				this.set('selectedPups', p.p || 0);

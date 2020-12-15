@@ -10,12 +10,6 @@ const DIALOG_TYPE = {
 	,GAME_OVER: 1 // e.g.: too many ill people
 };
 
-// location type for puddles
-const LOCATION = {
-	INSIDE_VILLAGE: 0
-	,OUTSIDE_VILLAGE: 1
-};
-
 // state for puddle, per period
 const PUDDLE_STATE = {
 	EMPTY: 0 // doesn't exist in this period
