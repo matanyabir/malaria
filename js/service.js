@@ -69,6 +69,7 @@ const Service = (function()
 		$.ajax({
 			url: SERVER_URL + "/map/" + mapInstanceId + "/inc",
 			type: 'PUT',
+			contentType: "application/json",
 			data: JSON.stringify(data),
 			success: function(data) {
 				if (data.mosquitoes) {
@@ -101,6 +102,7 @@ const Service = (function()
 		$.ajax({
 			url: SERVER_URL + "/map/" + mapInstanceId + "/spray/houses",
 			type: 'PUT',
+			contentType: "application/json",
 			data: JSON.stringify(data),
 			success: function(data) {
 				cbSuccess(data);
@@ -130,6 +132,7 @@ const Service = (function()
 		$.ajax({
 			url: SERVER_URL + "/map/" + mapInstanceId + "/destroy",
 			type: 'PUT',
+			contentType: "application/json",
 			data: JSON.stringify(data),
 			success: function(data) {
 				cbSuccess(data);
@@ -159,6 +162,7 @@ const Service = (function()
 		$.ajax({
 			url: SERVER_URL + "/map/" + mapInstanceId + "/spray/puddles",
 			type: 'PUT',
+			contentType: "application/json",
 			data: JSON.stringify(data),
 			success: function(data) {
 				cbSuccess(data);
