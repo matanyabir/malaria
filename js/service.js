@@ -6,6 +6,13 @@ const Service = (function()
 	const SERVER_URL = "http://localhost:3000";
 	const me = {};
 
+	const convertMosquitoes = function (arr) {
+		if (arr) {
+			return arr.map(([x, y, c]) => {
+				x, y, c
+			});
+		}
+	};
 	/**
 	 * create a new level ("level instance") for "level class id"
 	 *
@@ -38,7 +45,7 @@ const Service = (function()
 	me.getMosquitoes = function(mapInstanceId, cbSuccess, cbFail)
 	{
 		$.get(SERVER_URL + "/map/" + mapInstanceId + "/mosquitoes", function( data ) {
-			cbSuccess( data );
+			cbSuccess( convertMosquitoes(data) );
 		}).fail(function(){
 			if (cbFail) {
 				cbFail();
@@ -64,6 +71,9 @@ const Service = (function()
 			type: 'PUT',
 			data: JSON.stringify(data),
 			success: function(data) {
+				if (data.mosquitoes) {
+					data.mosquitoes = convertMosquitoes(data.mosquitoes);
+				}
 				cbSuccess(data);
 			},
 			fail: function(data) {
