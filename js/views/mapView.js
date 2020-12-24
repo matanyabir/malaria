@@ -25,9 +25,24 @@ const MapView = Backbone.View.extend({
 		this.renderMap();
 		this.renderHouses();
 		this.renderPuddles();
+		this.scrollToMiddle();
 		return this;
 	},
 
+	scrollToMiddle ()
+	{
+		setTimeout( () => {
+			const horizontalScroll = this.$bigMap.width() - this.$mapContainer.width();
+			console.log('horizontalScroll', horizontalScroll);
+			if (horizontalScroll > 0) {
+				this.$mapContainer.scrollLeft(horizontalScroll / 2);
+			}
+			const verticalScroll = this.$bigMap.height() - this.$mapContainer.height();
+			if (verticalScroll > 0) {
+				this.$mapContainer.scrollTop(verticalScroll / 2);
+			}
+		}, 0);
+	},
 	closeGraphView ()
 	{
 		this.$graph.removeClass('selected');
