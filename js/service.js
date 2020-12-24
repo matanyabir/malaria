@@ -177,5 +177,21 @@ const Service = (function()
 		});
 	};
 
+	/**
+	 * notify the server that the user closed the browser...
+	 *
+	 * @param {string} mapInstanceId - the id that represents the curr level instance
+	 * @author Matanya
+	 */
+	me.onClose = function(mapInstanceId, puddlesIds, cbSuccess, cbFail)
+	{
+		$.ajax({
+			url: SERVER_URL + "/map/" + mapInstanceId + "/onClose",
+			type: 'PUT',
+			success: function(data) {},
+			fail: function(data) {}
+		});
+	};
+
 	return me;
 })();

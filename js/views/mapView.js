@@ -27,9 +27,16 @@ const MapView = Backbone.View.extend({
 		this.renderPuddles();
 		this.scrollToMiddle();
 		this.dragToScroll();
+		this.handleClose();
 		return this;
 	},
 
+	handleClose ()
+	{
+		window.addEventListener("onunload", function (e) {
+			Service.onClose(this.model.get('id'));
+		});
+	},
 	scrollToMiddle ()
 	{
 		setTimeout( () => {
