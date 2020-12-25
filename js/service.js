@@ -8,8 +8,8 @@ const Service = (function()
 
 	const convertMosquitoes = function (arr) {
 		if (arr) {
-			return arr.map(([x, y, c]) => {
-				x, y, c
+			return arr.map(function([x, y, c]){
+				return {x, y, c};
 			});
 		}
 	};
